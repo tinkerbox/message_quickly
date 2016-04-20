@@ -1,3 +1,9 @@
 = MessengerPlatform
 
+{<img src="https://codeclimate.com/repos/5717877649b3792dd500162a/badges/1a505a2575aa442ff417/gpa.svg" />}[https://codeclimate.com/repos/5717877649b3792dd500162a/feed]
+
+{<img src="https://codeclimate.com/repos/5717877649b3792dd500162a/badges/1a505a2575aa442ff417/coverage.svg" />}[https://codeclimate.com/repos/5717877649b3792dd500162a/coverage]
+
+{<img src="https://codeclimate.com/repos/5717877649b3792dd500162a/badges/1a505a2575aa442ff417/issue_count.svg" />}[https://codeclimate.com/repos/5717877649b3792dd500162a/feed]
+
 This project rocks and uses MIT-LICENSE.
