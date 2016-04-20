@@ -1,5 +1,7 @@
 require 'json'
 
+# TODO: turn into singleton
+
 module MessengerPlatform
   class CallbackRegistry
 

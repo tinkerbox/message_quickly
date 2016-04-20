@@ -1,13 +1,6 @@
 module MessengerPlatform
   module Messaging
-    class Sender
-
-      attr_reader :id
-
-      def initialize(params = {})
-        @id = params['id']
-      end
-
+    class Sender < User
     end
   end
 end

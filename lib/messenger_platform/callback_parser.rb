@@ -3,6 +3,7 @@ require 'json'
 require "messenger_platform/messaging/attachment"
 require "messenger_platform/messaging/event"
 require "messenger_platform/messaging/entry"
+require "messenger_platform/messaging/user"
 require "messenger_platform/messaging/recipient"
 require "messenger_platform/messaging/sender"
 
