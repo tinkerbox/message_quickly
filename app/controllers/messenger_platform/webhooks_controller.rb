@@ -10,7 +10,7 @@ module MessengerPlatform
     end
 
     def callback
-      if params[:valid] == true # Webhooks.process_raw(request.body.read)
+      if params[:valid] == true # MessengerPlatform::process_raw(request.body.read)
         render nothing: true, status: 200
       else
         render plain: 'Error processing callback', status: 500

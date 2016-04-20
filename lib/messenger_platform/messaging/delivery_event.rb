@@ -1,3 +1,5 @@
+require "messenger_platform/messaging/event"
+
 module MessengerPlatform
   module Messaging
     class DeliveryEvent < Event
@@ -5,16 +7,16 @@ module MessengerPlatform
       attr_reader :mids, :watermark, :seq
 
       def initialize(params = {})
-        initialize_params(params[:messaging])
+        initialize_params(params['delivery'])
         super(params[:entry], params[:sender], params[:recipient], params[:timestamp])
       end
 
       private
 
       def initialize_params(messaging_params)
-        @mids = params['mids']
-        @watermark = params['watermark']
-        @seq = params['seq']
+        @mids = messaging_params['mids']
+        @watermark = messaging_params['watermark']
+        @seq = messaging_params['seq']
       end
 
     end

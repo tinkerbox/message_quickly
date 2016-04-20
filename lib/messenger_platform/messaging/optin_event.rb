@@ -1,3 +1,5 @@
+require "messenger_platform/messaging/event"
+
 module MessengerPlatform
   module Messaging
     class OptinEvent < Event
@@ -5,14 +7,14 @@ module MessengerPlatform
       attr_reader :ref
 
       def initialize(params = {})
-        initialize_params(params[:messaging])
+        initialize_params(params['optin'])
         super(params[:entry], params[:sender], params[:recipient], params[:timestamp])
       end
 
       private
 
       def initialize_params(messaging_params)
-        @ref = params['ref']
+        @ref = messaging_params['ref']
       end
 
     end

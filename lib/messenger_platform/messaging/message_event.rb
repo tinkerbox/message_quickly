@@ -1,3 +1,5 @@
+require "messenger_platform/messaging/event"
+
 module MessengerPlatform
   module Messaging
     class MessageEvent < Event
@@ -5,18 +7,20 @@ module MessengerPlatform
       attr_reader :mid, :seq, :text, :attachments
 
       def initialize(params = {})
-        initialize_params(params[:messaging])
+        initialize_params(params['message'])
         super(params[:entry], params[:sender], params[:recipient], params[:timestamp])
       end
 
       private
 
       def initialize_params(messaging_params)
-        @mid = params['mid']
-        @seq = params['seq']
-        @text = params['text']
-        @attachments = params['attachments'].collect do |attachment_params|
-          Attachment.new(attachment_params)
+        @mid = messaging_params['mid']
+        @seq = messaging_params['seq']
+        @text = messaging_params['text']
+        if messaging_params['attachments']
+          @attachments = messaging_params['attachments'].collect do |attachment_params|
+            Attachment.new(attachment_params)
+          end
         end
       end
 

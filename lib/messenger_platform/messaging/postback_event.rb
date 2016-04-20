@@ -1,3 +1,5 @@
+require "messenger_platform/messaging/event"
+
 module MessengerPlatform
   module Messaging
     class PostbackEvent < Event
@@ -5,15 +7,14 @@ module MessengerPlatform
       attr_reader :payload
 
       def initialize(params = {})
-        initialize_params(params[:messaging])
-        
+        initialize_params(params['postback'])
         super(params[:entry], params[:sender], params[:recipient], params[:timestamp])
       end
 
       private
 
-      def initialize_params(messaging_params)
-        @payload = params['payload']
+      def initialize_params(messaging_params = {})
+        @payload = messaging_params['payload']
       end
 
     end
