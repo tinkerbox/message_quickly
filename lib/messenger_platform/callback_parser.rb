@@ -1,5 +1,7 @@
 require 'json'
 
+require "messenger_platform/messaging/delivery"
+require "messenger_platform/messaging/message"
 require "messenger_platform/messaging/attachment"
 require "messenger_platform/messaging/event"
 require "messenger_platform/messaging/entry"
