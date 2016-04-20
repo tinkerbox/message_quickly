@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = MessengerPlatform::VERSION
   s.authors     = ["Jaryl Sim"]
   s.email       = ["jaryl@tinkerbox.com.sg"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of MessengerPlatform."
-  s.description = "TODO: Description of MessengerPlatform."
+  s.homepage    = "https://github.com/tinkerbox/messenger_platform"
+  s.summary     = "Integrate Facebook's messenger platform with your rails app"
+  s.description = "MessengerPlatform includes a mountable engine to process webhooks, and an API wrapper to talk to Facebook."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
