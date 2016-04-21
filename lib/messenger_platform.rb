@@ -12,6 +12,7 @@ require "messenger_platform/api/user_profile"
 
 require "messenger_platform/engine"
 
+require "messenger_platform/callback"
 require "messenger_platform/callback_parser"
 require "messenger_platform/callback_registry"
 

@@ -4,11 +4,10 @@ module MessengerPlatform
 
       attr_reader :entry, :sender, :recipient, :timestamp
 
-      def initialize(entry, sender, recipient, timestamp)
-        @entry = entry
-        @sender = sender
-        @recipient = recipient
-        @timestamp = timestamp
+      def initialize(params = {})
+        @sender = Sender.new(params.delete("sender"))
+        @recipient = Recipient.new(params.delete("recipient"))
+        params.each { |key, value| instance_variable_set("@#{key}", value) }
       end
 
     end

@@ -8,7 +8,11 @@ module MessengerPlatform
 
       def initialize(params = {})
         initialize_params(params['optin'])
-        super(params[:entry], params[:sender], params[:recipient], params[:timestamp])
+        super(params)
+      end
+
+      def webhook_name
+        :messaging_optins
       end
 
       private

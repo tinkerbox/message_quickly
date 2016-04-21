@@ -27,7 +27,7 @@ module MessengerPlatform
         # }' "https://graph.facebook.com/v2.6/<PAGE_ID>/thread_settings?access_token=<PAGE_ACCESS_TOKEN>"
         request_string = "#{ENV['FACEBOOK_MESSENGER_PAGE_ID']}/thread_settings"
         json = client.post(request_string, { setting_type: 'call_to_actions', thread_state: 'new_thread', call_to_actions: [] })
-        json['result'] == "Successfully added new_thread's CTAs"
+        json['result'] == "Successfully removed all new_thread's CTAs"
       end
 
     end

@@ -1,26 +1,39 @@
 require 'json'
 
-# TODO: turn into singleton
-
 module MessengerPlatform
   class CallbackRegistry
 
-    @callbacks = {}
+    module ClassMethods
 
-    def register(webhook_name, &block)
-      @callbacks[webhook_name.to_sym] = block
-    end
+      attr_reader :callbacks
 
-    def deregister(webhook_name)
-      @callbacks.delete(webhook_name.to_sym)
-    end
-
-    def process_request(raw)
-      json = JSON.parse(raw)
-      CallbackParser.new(json).parse do |webhook, event|
-        @callbacks[webhook].call(event)
+      def register(klass)
+        callback = klass.new
+        @callbacks[callback.callback_name] = callback.method(:run)
       end
+
+      def find_by_callback_name(callback_name)
+        @callbacks[callback_name]
+      end
+
+      def process_request(raw)
+        json = JSON.parse(raw)
+        CallbackParser.new(json).parse do |event|
+          @callbacks[event.webhook_name].call(event)
+        end
+        true
+      rescue JSON::ParserError => e
+        false
+      end
+
     end
+
+    extend ClassMethods
 
   end
+
+  CallbackRegistry.class_eval do
+    @callbacks = {}
+  end
+
 end

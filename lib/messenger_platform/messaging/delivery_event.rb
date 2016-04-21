@@ -8,7 +8,11 @@ module MessengerPlatform
 
       def initialize(params = {})
         initialize_params(params['delivery'])
-        super(params[:entry], params[:sender], params[:recipient], params[:timestamp])
+        super(params)
+      end
+
+      def webhook_name
+        :message_deliveries
       end
 
       private

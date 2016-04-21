@@ -9,8 +9,7 @@ describe MessengerPlatform::Api::ThreadSettings do
     let(:message) { MessengerPlatform::Messaging::Message.new(text: 'Hello') }
 
     context 'with valid params' do
-      pending
-      # it { expect(subject.create(message)).to be_truthy }
+      it { expect(subject.create(message)).to eq(true) }
     end
 
     context 'with invalid params' do
@@ -21,8 +20,7 @@ describe MessengerPlatform::Api::ThreadSettings do
   end
 
   describe '#delete' do
-    pending
-    # it { expect(subject.delete).to be_truthy }
+    it { expect(subject.delete).to eq(true) }
   end
 
 end

@@ -5,7 +5,7 @@ module MessengerPlatform
       attr_reader :id
 
       def initialize(params = {})
-        @id = params['id']
+        params.each { |key, value| instance_variable_set("@#{key}", value) }
       end
 
     end
