@@ -1,3 +1,5 @@
+require "messenger_platform/version"
+
 require "messenger_platform/api/client"
 require "messenger_platform/api/base"
 require "messenger_platform/api/messages"
