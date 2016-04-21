@@ -1,6 +1,8 @@
 module MessengerPlatform
   class WebhooksController < ApplicationController
 
+    skip_before_action :verify_authenticity_token
+
     def verify
       if params['hub.verify_token'] == ENV['FACEBOOK_MESSENGER_VERIFICATION_TOKEN']
         render plain: params['hub.challenge'], status: 200
