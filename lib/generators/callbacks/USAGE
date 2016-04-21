@@ -1,0 +1,11 @@
+Description:
+    Explain the generator
+
+Example:
+    rails generate callbacks
+
+    This will create:
+        app/webhooks/authentication_callback.rb
+        app/webhooks/message_delivered_callback.rb
+        app/webhooks/message_received_callback.rb
+        app/webhooks/postback_callback.rb
