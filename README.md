@@ -4,6 +4,11 @@
 
 # Messenger Platform
 
+By [Tinkerbox Studios](https://www.tinkerbox.com.sg).
+
+This gem is a lightweight solution to integrate [Facebook's messenger platform](https://developers.facebook.com/products/messenger/) into your rails app, allowing you to create bots to facilitate conversations with people on Facebook Messenger. It includes a mountable rails engine to handle [webhooks](https://developers.facebook.com/docs/messenger-platform/webhook-reference), and a simple client to talk to the [Send API](https://developers.facebook.com/docs/messenger-platform/send-api-reference).
+
+We also have an [accompanying demo app](https://github.com/tinkerbox/messenger_platform_demo).
 
 ## Installation
 
@@ -19,7 +24,7 @@ Mount the engine in your `routes.rb` (`\webhook` is used in the examples):
 
     mount MessengerPlatform::Engine, at: "/webhook"
 
-Generate the page access token on the developer portal, which will allow you to start using the APIs:
+Generate the page access token on the [developer portal](https://developers.facebook.com), which will allow you to start using the APIs:
 
 ![Generate Page Access Token](https://cloud.githubusercontent.com/assets/19878/14728362/682e3ba0-0866-11e6-9b68-fe9d2a220d56.png)
 
@@ -37,7 +42,7 @@ Create the following environment variables:
 
 You will need to run your app, and make it accessible to the developer portal now, so run your server:
 
-  rail server
+    rail server
 
 Use something like [Burrow](https://burrow.io/) to provide access to your localhost:
 
@@ -51,7 +56,7 @@ Facebook will then verify with the mounted engine, and you're all set.
 
 ## Usage
 
-There are two parts to this gem, handling [webhooks](https://developers.facebook.com/docs/messenger-platform/webhook-reference) (which is what the rails engine is for), and calling the [Send API](https://developers.facebook.com/docs/messenger-platform/send-api-reference).
+There are two parts to this gem: handling [webhooks](https://developers.facebook.com/docs/messenger-platform/webhook-reference) (which is what the rails engine is for), and calling the [Send API](https://developers.facebook.com/docs/messenger-platform/send-api-reference).
 
 ### Webhooks
 
@@ -116,8 +121,10 @@ You will need your own profile id if you are to run the specs. Run them now with
 Things on the roadmap include:
 
 * simplify usage of the Send API
-* support different type of message templates
+* support for structured templates
 * improve on exception handling
+* helpers for generating [messenger plugins](https://developers.facebook.com/docs/messenger-platform/plugin-reference)
+* support for customer matching
 
 ## Credits
 
