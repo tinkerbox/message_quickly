@@ -1,9 +1,0 @@
-= MessengerPlatform
-
-{<img src="https://codeclimate.com/github/tinkerbox/messenger_platform/badges/gpa.svg" />}[https://codeclimate.com/github/tinkerbox/messenger_platform]
-
-{<img src="https://codeclimate.com/github/tinkerbox/messenger_platform/badges/coverage.svg" />}[https://codeclimate.com/github/tinkerbox/messenger_platform/coverage]
-
-{<img src="https://codeclimate.com/github/tinkerbox/messenger_platform/badges/issue_count.svg" />}[https://codeclimate.com/github/tinkerbox/messenger_platform/issues]
-
-This project rocks and uses MIT-LICENSE.
