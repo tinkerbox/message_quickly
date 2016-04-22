@@ -6,11 +6,17 @@ module MessengerPlatform
 
     isolate_namespace MessengerPlatform
 
-    initializer "messenger_platform.load_app_root" do |app|
+    initializer 'messenger_platform.load_app_root' do |app|
       MessengerPlatform.app_root = app.root
       Dir[MessengerPlatform.app_root + 'app/webhooks/*.rb'].each { |file| load file }
       Callback.subclasses.each do |callback|
         CallbackRegistry.register(callback)
+      end
+    end
+
+    initializer 'messenger_platform.action_controller' do |app|
+      ActiveSupport.on_load :action_controller do
+        helper MessengerPlatform::ApplicationHelper
       end
     end
 

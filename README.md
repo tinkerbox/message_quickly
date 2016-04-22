@@ -58,6 +58,8 @@ Facebook will then verify with the mounted engine, and you're all set.
 
 There are two parts to this gem: handling [webhooks](https://developers.facebook.com/docs/messenger-platform/webhook-reference) (which is what the rails engine is for), and calling the [Send API](https://developers.facebook.com/docs/messenger-platform/send-api-reference).
 
+Additionally, there are some helpers for working with [messenger plugins](https://developers.facebook.com/docs/messenger-platform/plugin-reference).
+
 ### Webhooks
 
 When you run `rails generate callbacks`, four files will be created for you. They look something like this:
@@ -105,6 +107,28 @@ end
 
 This is still a work in progress, and further documentation will be provided.
 
+### Plugins
+
+This is optional, and only necessary if you want to add the 'Send to Messenger' or 'Message Us' buttons to your app.
+
+Firstly, add the javascript require to your manifest file:
+
+    //= require messenger_platform
+
+Then, in your view templates (presumably slim), add:
+
+    = send_to_messenger
+    = message_us
+
+You can also customize them as such:
+
+    = send_to_messenger(size: 'large')
+    = message_us(size: 'xlarge', color: 'white')
+
+For size, supported values include `standard`, `large` and `xlarge`, while color supports `blue` and `white` only.
+
+[messenger plugins](https://developers.facebook.com/docs/messenger-platform/plugin-reference)
+
 ## Development & Contributing
 
 Set up your `.env` file like so:
@@ -123,8 +147,8 @@ Things on the roadmap include:
 * simplify usage of the Send API
 * support for structured templates
 * improve on exception handling
-* helpers for generating [messenger plugins](https://developers.facebook.com/docs/messenger-platform/plugin-reference)
 * support for customer matching
+* retrieve user profile information seamlessly
 
 ## Credits
 
