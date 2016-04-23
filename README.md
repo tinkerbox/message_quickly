@@ -133,7 +133,16 @@ end
 
 #### Sending an image as a file
 
-This is not supported yet.
+```
+delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
+  delivery.build_message do |message|
+    message.build_attachment(:image) do |attachment|
+      attachment.file = "spec/fixtures/12057251_909506139117248_2059695706_n.png"
+      attachment.file_type = 'image/png'
+    end
+  end
+end
+```
 
 #### Sending a generic template attachment
 
