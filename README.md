@@ -68,7 +68,7 @@ Generate the callback files:
 
 When you run `rails generate callbacks`, four files will be created for you. They look something like this:
 
-```
+```ruby
 class AuthenticationCallback < MessengerPlatform::Callback
 
   def callback_name
@@ -102,7 +102,7 @@ This makes use of the environment variables `FACEBOOK_MESSENGER_PAGE_ACCESS_TOKE
 
 In future you will be able to create your own clients like so:
 
-```
+```ruby
 @send_api_client = MessengerPlatform::Api::Client.new do |client|
   client.page_access_token = '<page access token goes here>'
   client.page_id = '<page id goes here>'
@@ -115,7 +115,7 @@ end
 
 #### Sending a simple text message
 
-```
+```ruby
 delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
   delivery.build_message { |message| message.text = 'Hello' }
 end
@@ -123,7 +123,7 @@ end
 
 #### Sending an image as a URL
 
-```
+```ruby
 delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
   delivery.build_message do |message|
     message.build_attachment(:image) { |attachment| attachment.url = 'http://placehold.it/350x150' }
@@ -133,7 +133,7 @@ end
 
 #### Sending an image as a file
 
-```
+```ruby
 delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
   delivery.build_message do |message|
     message.build_attachment(:image) do |attachment|
@@ -146,7 +146,7 @@ end
 
 #### Sending a generic template attachment
 
-```
+```ruby
 delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
   delivery.build_message do |message|
     message.build_attachment(:generic_template) do |template|
@@ -204,7 +204,7 @@ end
 
 #### Sending a button template attachment
 
-```
+```ruby
 delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
   delivery.build_message do |message|
     message.build_attachment(:button_template) do |template|
@@ -228,7 +228,7 @@ end
 
 #### Sending a receipt template attachment
 
-```
+```ruby
 delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
   delivery.build_message do |message|
     message.build_attachment(:receipt_template) do |template|
