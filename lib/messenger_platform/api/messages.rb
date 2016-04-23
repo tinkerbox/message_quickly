@@ -22,7 +22,6 @@ module MessengerPlatform
         yield delivery if block_given?
 
         request_string = "me/messages"
-        # raise delivery.to_hash.inspect
         json = client.post(request_string, delivery.to_hash)
         delivery.id = json['message_id']
         delivery

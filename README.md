@@ -100,7 +100,7 @@ By default, the API client will be created for you, and is accessible at:
 
 This makes use of the environment variables `FACEBOOK_MESSENGER_PAGE_ACCESS_TOKEN` and `FACEBOOK_MESSENGER_PAGE_ID`.
 
-You can also create your own instances like so:
+In future you will be able to create your own clients like so:
 
 ```
 @send_api_client = MessengerPlatform::Api::Client.new do |client|
@@ -109,7 +109,176 @@ You can also create your own instances like so:
 end
 ```
 
-This is still a work in progress, and further documentation will be provided.
+#### Creating a recipient object
+
+    recipient = MessengerPlatform::Messaging::Recipient.new(id: '123')
+
+#### Sending a simple text message
+
+```
+delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
+  delivery.build_message { |message| message.text = 'Hello' }
+end
+```
+
+#### Sending an image as a URL
+
+```
+delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
+  delivery.build_message do |message|
+    message.build_attachment(:image) { |attachment| attachment.url = 'http://placehold.it/350x150' }
+  end
+end
+```
+
+#### Sending an image as a file
+
+This is not supported yet.
+
+#### Sending a generic template attachment
+
+```
+delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
+  delivery.build_message do |message|
+    message.build_attachment(:generic_template) do |template|
+
+      template.build_element do |element|
+
+        element.title = "Classic White T-Shirt"
+        element.image_url = 'http://petersapparel.parseapp.com/img/item100-thumb.png'
+        element.subtitle = 'Soft white cotton t-shirt is back in style'
+
+        element.build_button(:web_url) do |button|
+          button.url = "https://petersapparel.parseapp.com/view_item?item_id=100"
+          button.title = "View Item"
+        end
+
+        element.build_button(:web_url) do |button|
+          button.url = "https://petersapparel.parseapp.com/buy_item?item_id=100"
+          button.title = "Buy Item"
+        end
+
+        element.build_button(:postback) do |button|
+          button.payload = "USER_DEFINED_PAYLOAD_FOR_ITEM100"
+          button.title = "Bookmark Item"
+        end
+
+      end
+
+      template.build_element do |element|
+
+        element.title = "Classic Grey T-Shirt"
+        element.image_url = 'http://petersapparel.parseapp.com/img/item101-thumb.png'
+        element.subtitle = 'Soft gray cotton t-shirt is back in style'
+
+        element.build_button(:web_url) do |button|
+          button.url = "https://petersapparel.parseapp.com/view_item?item_id=101"
+          button.title = "View Item"
+        end
+
+        element.build_button(:web_url) do |button|
+          button.url = "https://petersapparel.parseapp.com/buy_item?item_id=101"
+          button.title = "Buy Item"
+        end
+
+        element.build_button(:postback) do |button|
+          button.payload = "USER_DEFINED_PAYLOAD_FOR_ITEM101"
+          button.title = "Bookmark Item"
+        end
+
+      end
+
+    end
+  end
+end
+```
+
+#### Sending a button template attachment
+
+```
+delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
+  delivery.build_message do |message|
+    message.build_attachment(:button_template) do |template|
+
+      template.text = 'How are you doing today?'
+
+      template.build_button(:web_url) do |button|
+        button.url = 'https://petersapparel.parseapp.com'
+        button.title = 'Show Website'
+      end
+
+      template.build_button(:postback) do |button|
+        button.payload = 'USER_DEFINED_PAYLOAD'
+        button.title = 'Start Chatting'
+      end
+
+    end
+  end
+end
+```
+
+#### Sending a receipt template attachment
+
+```
+delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
+  delivery.build_message do |message|
+    message.build_attachment(:receipt_template) do |template|
+
+      template.recipient_name = 'Stephane Crozatier'
+      template.order_number = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+      template.currency = 'USD'
+      template.payment_method = 'Visa 2345'
+      template.order_url = 'http://petersapparel.parseapp.com/order?order_id=123456'
+      template.timestamp = '1428444852'
+
+      template.build_element do |element|
+        element.title = 'Classic White T-Shirt'
+        element.subtitle = '100% Soft and Luxurious Cotton'
+        element.quantity = 2
+        element.price = 50
+        element.currency = 'USD'
+        element.image_url = 'http://petersapparel.parseapp.com/img/whiteshirt.png'
+      end
+
+      template.build_element do |element|
+        element.title = 'Classic Gray T-Shirt'
+        element.subtitle = '100% Soft and Luxurious Cotton'
+        element.quantity = 1
+        element.price = 25
+        element.currency = 'USD'
+        element.image_url = 'http://petersapparel.parseapp.com/img/grayshirt.png'
+      end
+
+      template.build_address do |address|
+        address.street_1 = "1 Hacker Way"
+        address.street_2 = ""
+        address.city = "Menlo Park"
+        address.postal_code = "94025"
+        address.state = "CA"
+        address.country = "US"
+      end
+
+      template.build_summary do |summary|
+        summary.subtotal = 75.00
+        summary.shipping_cost = 4.95
+        summary.total_tax = 6.19
+        summary.total_cost = 56.14
+      end
+
+      template.build_adjustment do |adjustment|
+        adjustment.name = "New Customer Discount"
+        adjustment.amount = 20
+      end
+
+      template.build_adjustment do |adjustment|
+        adjustment.name = "$10 Off Coupon"
+        adjustment.amount = 10
+      end
+
+    end
+  end
+end
+```
 
 ### Plugins
 
@@ -148,13 +317,12 @@ You will need your own profile id if you are to run the specs. Run them now with
 
 Things on the roadmap include:
 
-* simplify usage of the Send API
 * simplify callback name
-* support for structured templates
 * improve on exception handling
 * support for customer matching (US-based page required)
 * retrieve user profile information seamlessly
-* support for file uploads
+* support for image file uploads
+* support for multiple clients
 
 ## Credits
 
