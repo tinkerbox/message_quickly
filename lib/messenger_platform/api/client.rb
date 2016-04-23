@@ -41,6 +41,8 @@ module MessengerPlatform
             raise OauthException.new(json['error'])
           when 'GraphMethodException'
             raise GraphMethodException.new(json['error'])
+          else
+            raise FacebookApiException.new(json['error'])
           end
         end
         json

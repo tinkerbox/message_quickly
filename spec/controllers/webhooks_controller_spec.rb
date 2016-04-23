@@ -22,17 +22,72 @@ describe MessengerPlatform::WebhooksController, type: :controller do
 
   describe 'POST #callback' do
 
-    let(:optin_json) { File.read("spec/fixtures/optin_request.json") }
+    context 'with an optin request' do
 
-    context 'with valid params' do
-      before { post :callback, optin_json }
-      it { expect(response).to have_http_status(200) }
+      let(:optin_json) { File.read("spec/fixtures/optin_request.json") }
+
+      context 'with valid params' do
+        before { post :callback, optin_json }
+        it { expect(response).to have_http_status(200) }
+      end
+
+      context 'with invalid params' do
+        before { post :callback, 'invalid json' }
+        it { expect(response.body).to eq('Error processing callback') }
+        it { expect(response).to have_http_status(500) }
+      end
+
     end
 
-    context 'with invalid params' do
-      before { post :callback, 'invalid json' }
-      it { expect(response.body).to eq('Error processing callback') }
-      it { expect(response).to have_http_status(500) }
+    context 'with a delivery request' do
+
+      let(:optin_json) { File.read("spec/fixtures/delivery_request.json") }
+
+      context 'with valid params' do
+        before { post :callback, optin_json }
+        it { expect(response).to have_http_status(200) }
+      end
+
+      context 'with invalid params' do
+        before { post :callback, 'invalid json' }
+        it { expect(response.body).to eq('Error processing callback') }
+        it { expect(response).to have_http_status(500) }
+      end
+
+    end
+
+    context 'with a message request' do
+
+      let(:optin_json) { File.read("spec/fixtures/message_request.json") }
+
+      context 'with valid params' do
+        before { post :callback, optin_json }
+        it { expect(response).to have_http_status(200) }
+      end
+
+      context 'with invalid params' do
+        before { post :callback, 'invalid json' }
+        it { expect(response.body).to eq('Error processing callback') }
+        it { expect(response).to have_http_status(500) }
+      end
+
+    end
+
+    context 'with a postback request' do
+
+      let(:optin_json) { File.read("spec/fixtures/postback_request.json") }
+
+      context 'with valid params' do
+        before { post :callback, optin_json }
+        it { expect(response).to have_http_status(200) }
+      end
+
+      context 'with invalid params' do
+        before { post :callback, 'invalid json' }
+        it { expect(response.body).to eq('Error processing callback') }
+        it { expect(response).to have_http_status(500) }
+      end
+
     end
 
   end

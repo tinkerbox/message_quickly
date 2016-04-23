@@ -326,8 +326,8 @@ You will need your own Facebook profile id if you are to run the specs. Run them
 Things on the roadmap include:
 
 * simplify callback name
-* improve on exception handling
-* support for customer matching (US-based page required)
+* catch FacebookApiException errors
+* support for customer matching (US-based page required), not tested yet
 * retrieve user profile information seamlessly
 * support for multiple clients
 * use webmock to disallow remote requests in specs

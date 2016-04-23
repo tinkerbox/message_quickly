@@ -12,10 +12,6 @@ module MessengerPlatform
         @callbacks[callback.callback_name] = callback.method(:run)
       end
 
-      def find_by_callback_name(callback_name)
-        @callbacks[callback_name]
-      end
-
       def process_request(raw)
         json = JSON.parse(raw)
         CallbackParser.new(json).parse do |event|
