@@ -15,14 +15,6 @@ module MessengerPlatform
         :message_deliveries
       end
 
-      private
-
-      def initialize_params(messaging_params)
-        @mids = messaging_params['mids']
-        @watermark = messaging_params['watermark']
-        @seq = messaging_params['seq']
-      end
-
     end
   end
 end

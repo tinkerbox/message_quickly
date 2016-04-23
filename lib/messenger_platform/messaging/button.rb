@@ -1,8 +1,8 @@
 module MessengerPlatform
   module Messaging
-    class User
+    class Button
 
-      attr_reader :id, :first_name, :last_name, :profile_pic
+      attr_accessor :type, :title
 
       def initialize(params = {})
         params.each { |key, value| instance_variable_set("@#{key}", value) }

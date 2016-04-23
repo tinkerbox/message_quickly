@@ -15,17 +15,11 @@ module MessengerPlatform
         :messages
       end
 
-      private
+      protected
 
-      def initialize_params(messaging_params)
-        @mid = messaging_params['mid']
-        @seq = messaging_params['seq']
-        @text = messaging_params['text']
-        if messaging_params['attachments']
-          @attachments = messaging_params['attachments'].collect do |attachment_params|
-            Attachment.new(attachment_params)
-          end
-        end
+      def initialize_params(params)
+        @attachments = params.delete('attachments').collect { |attachment_params| Attachment.new(attachment_params) } if params['attachments']
+        super(params)
       end
 
     end

@@ -1,14 +1,30 @@
 require 'json'
 
+require "messenger_platform/messaging/attachment"
+require "messenger_platform/messaging/image_attachment"
+require "messenger_platform/messaging/template_attachment"
+require "messenger_platform/messaging/base"
+require "messenger_platform/messaging/element"
+require "messenger_platform/messaging/button"
+require "messenger_platform/messaging/web_url_button"
+require "messenger_platform/messaging/postback_button"
+require "messenger_platform/messaging/button_template_attachment"
+require "messenger_platform/messaging/generic_template_attachment"
+
+require "messenger_platform/messaging/receipt/address"
+require "messenger_platform/messaging/receipt/adjustment"
+require "messenger_platform/messaging/receipt/element"
+require "messenger_platform/messaging/receipt/summary"
+require "messenger_platform/messaging/receipt_template_attachment"
+
 require "messenger_platform/messaging/delivery"
 require "messenger_platform/messaging/message"
-require "messenger_platform/messaging/attachment"
-require "messenger_platform/messaging/event"
 require "messenger_platform/messaging/entry"
 require "messenger_platform/messaging/user"
 require "messenger_platform/messaging/recipient"
 require "messenger_platform/messaging/sender"
 
+require "messenger_platform/messaging/event"
 require "messenger_platform/messaging/optin_event"
 require "messenger_platform/messaging/delivery_event"
 require "messenger_platform/messaging/message_event"

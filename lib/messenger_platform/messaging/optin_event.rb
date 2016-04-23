@@ -15,12 +15,6 @@ module MessengerPlatform
         :messaging_optins
       end
 
-      private
-
-      def initialize_params(messaging_params)
-        @ref = messaging_params['ref']
-      end
-
     end
   end
 end

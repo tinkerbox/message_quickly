@@ -17,7 +17,6 @@ module MessengerPlatform
       else
         render plain: 'Error processing callback', status: 500
       end
-      
     end
 
   end

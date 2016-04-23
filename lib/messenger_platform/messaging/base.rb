@@ -1,11 +1,10 @@
 module MessengerPlatform
   module Messaging
-    class User
-
-      attr_reader :id, :first_name, :last_name, :profile_pic
+    class Base
 
       def initialize(params = {})
         params.each { |key, value| instance_variable_set("@#{key}", value) }
+        self
       end
 
     end

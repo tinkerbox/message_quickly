@@ -2,7 +2,7 @@ module MessengerPlatform
   module Api
     class Messages < Base
 
-      def self.create(delivery)
+      def self.create(recipient = nil, delivery = nil)
         # curl -X POST -H "Content-Type: application/json" -d '{
         #   "recipient":{
         #       "id":"USER_ID"
@@ -17,8 +17,13 @@ module MessengerPlatform
         #   "message_id": "mid.1456970487936:c34767dfe57ee6e339"
         # }
 
+        delivery ||= MessengerPlatform::Messaging::Delivery.new(recipient: recipient)
+        
+        yield delivery if block_given?
+
         request_string = "me/messages"
-        json = client.post(request_string, { recipient: { id: delivery.recipient.id }, message: { text: delivery.message.text } })
+        # raise delivery.to_hash.inspect
+        json = client.post(request_string, delivery.to_hash)
         delivery.id = json['message_id']
         delivery
       end

@@ -15,12 +15,6 @@ module MessengerPlatform
         :messaging_postbacks
       end
 
-      private
-
-      def initialize_params(messaging_params = {})
-        @payload = messaging_params['payload']
-      end
-
     end
   end
 end

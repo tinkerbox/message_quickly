@@ -16,14 +16,6 @@ Add this to your Gemfile, and then `bundle install`:
 
     gem 'messenger_platform'
 
-Generate the callback files:
-
-    rails generate callbacks
-
-Mount the engine in your `routes.rb` (`\webhook` is used in the examples):
-
-    mount MessengerPlatform::Engine, at: "/webhook"
-
 Generate the page access token on the [developer portal](https://developers.facebook.com), which will allow you to start using the APIs:
 
 ![Generate Page Access Token](https://cloud.githubusercontent.com/assets/19878/14728362/682e3ba0-0866-11e6-9b68-fe9d2a220d56.png)
@@ -42,7 +34,7 @@ Create the following environment variables:
 
 You will need to run your app, and make it accessible to the developer portal now, so run your server:
 
-    rail server
+    rails server
 
 Use something like [Burrow](https://burrow.io/) to provide access to your localhost:
 
@@ -54,6 +46,8 @@ Go to your Facebook App page in the developer portal, and use the above verifica
 
 Facebook will then verify with the mounted engine, and you're all set.
 
+Note: Your app is required to be served over HTTPS. When working locally, I used the default WEBrick server as it supports HTTPS connections out of the box.
+
 ## Usage
 
 There are two parts to this gem: handling [webhooks](https://developers.facebook.com/docs/messenger-platform/webhook-reference) (which is what the rails engine is for), and calling the [Send API](https://developers.facebook.com/docs/messenger-platform/send-api-reference).
@@ -61,6 +55,16 @@ There are two parts to this gem: handling [webhooks](https://developers.facebook
 Additionally, there are some helpers for working with [messenger plugins](https://developers.facebook.com/docs/messenger-platform/plugin-reference).
 
 ### Webhooks
+
+Webhooks allow the Facebook Messenger Platform to talk to your app. For example, you will receive a request on your webhook when a user authenticates or messages your Facebook page/app.
+
+Mount the engine in your `routes.rb` (`/webhook` is used in the examples):
+
+    mount MessengerPlatform::Engine, at: "/webhook"
+
+Generate the callback files:
+
+    rails generate callbacks
 
 When you run `rails generate callbacks`, four files will be created for you. They look something like this:
 
@@ -145,10 +149,12 @@ You will need your own profile id if you are to run the specs. Run them now with
 Things on the roadmap include:
 
 * simplify usage of the Send API
+* simplify callback name
 * support for structured templates
 * improve on exception handling
-* support for customer matching
+* support for customer matching (US-based page required)
 * retrieve user profile information seamlessly
+* support for file uploads
 
 ## Credits
 
