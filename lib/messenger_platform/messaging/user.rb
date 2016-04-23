@@ -5,17 +5,17 @@ module MessengerPlatform
       attr_reader :id, :first_name, :last_name, :profile_pic
 
       def first_name
-        pull_profile if @first_name.nil?
+        @first_name || user_profile.first_name
       end
 
       def last_name
-        pull_profile if @last_name.nil?
+        @last_name || user_profile.last_name
       end
 
       private
 
-      def pull_profile
-        
+      def user_profile
+        @user_profile ||= MessengerPlatform::Api::UserProfile.find(id)
       end
 
     end

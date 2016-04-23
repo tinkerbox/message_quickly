@@ -9,6 +9,7 @@ describe MessengerPlatform::Api::UserProfile do
     context 'with matching user' do
       it { expect(subject.find('1043180089111188')).to be_kind_of(MessengerPlatform::Messaging::User) }
       it { expect(subject.find('1043180089111188').first_name).to eq(ENV['FACEBOOK_MESSENGER_USER_FIRST_NAME']) }
+      it { expect(subject.find('1043180089111188').last_name).to eq(ENV['FACEBOOK_MESSENGER_USER_LAST_NAME']) }
     end
 
     context 'with no matching user' do
