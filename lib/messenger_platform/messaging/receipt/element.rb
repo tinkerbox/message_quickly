@@ -5,10 +5,6 @@ module MessengerPlatform
 
         attr_accessor :quantity, :price, :currency
 
-        def initialize(params = {})
-          params.each { |key, value| instance_variable_set("@#{key}", value) }
-        end
-
         def to_hash
           {
             title: title,

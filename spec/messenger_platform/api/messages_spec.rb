@@ -31,10 +31,22 @@ describe MessengerPlatform::Api::Messages do
         expect(delivery.id).not_to be_nil
       end
 
-      it 'should be able to send with an image attachment' do
+      it 'should be able to send with an image url attachment' do
         delivery = subject.create(recipient) do |delivery|
           delivery.build_message do |message|
             message.build_attachment(:image) { |attachment| attachment.url = 'http://placehold.it/350x150' }
+          end
+        end
+        expect(delivery.id).not_to be_nil
+      end
+
+      it 'should be able to send with an image file attachment' do
+        delivery = subject.create(recipient) do |delivery|
+          delivery.build_message do |message|
+            message.build_attachment(:image) do |attachment|
+              attachment.file = "spec/fixtures/12057251_909506139117248_2059695706_n.png"
+              attachment.file_type = 'image/png'
+            end
           end
         end
         expect(delivery.id).not_to be_nil

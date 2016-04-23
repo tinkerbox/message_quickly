@@ -2,7 +2,7 @@ module MessengerPlatform
   module Messaging
     class ImageAttachment < Attachment
 
-      attr_accessor :url
+      attr_accessor :url, :file, :file_type
 
       def initialize(params = {})
         params['type'] ||= 'image'
@@ -10,7 +10,15 @@ module MessengerPlatform
       end
 
       def to_hash
-        { type: type, payload: { url: url } }
+        if file?
+          { type: type, payload: { _: '' } } # cannot send empty hash
+        else
+          { type: type, payload: { url: url } }
+        end
+      end
+
+      def file?
+        file.present? && file_type.present?
       end
 
     end
@@ -25,3 +33,9 @@ end
 #     }
 #   }
 # ]
+
+# curl  \
+#   -F recipient='{"id":"USER_ID"}' \
+#   -F message='{"attachment":{"type":"image", "payload":{}}}' \
+#   -F filedata=@/tmp/testpng.png \
+#   "https://graph.facebook.com/v2.6/me/messages?access_token=PAGE_ACCESS_TOKEN"

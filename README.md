@@ -282,7 +282,7 @@ end
 
 ### Plugins
 
-This is optional, and only necessary if you want to add the 'Send to Messenger' or 'Message Us' buttons to your app.
+This is optional, and only necessary if you want to add the 'Send to Messenger' or 'Message Us' [buttons](https://developers.facebook.com/docs/messenger-platform/plugin-reference) to your app.
 
 Firstly, add the javascript require to your manifest file:
 
@@ -300,8 +300,6 @@ You can also customize them as such:
 
 For size, supported values include `standard`, `large` and `xlarge`, while color supports `blue` and `white` only.
 
-[messenger plugins](https://developers.facebook.com/docs/messenger-platform/plugin-reference)
-
 ## Development & Contributing
 
 Set up your `.env` file like so:
@@ -310,8 +308,9 @@ Set up your `.env` file like so:
     FACEBOOK_MESSENGER_PAGE_ACCESS_TOKEN=<generate this on the developer portal>
     FACEBOOK_MESSENGER_PAGE_ID=<your facebook page id>
     FACEBOOK_MESSENGER_USER_ID=<your own facebook profile id>
+    FACEBOOK_MESSENGER_USER_FIRST_NAME=<your own facebook profile's first name>
 
-You will need your own profile id if you are to run the specs. Run them now with:
+You will need your own Facebook profile id if you are to run the specs. Run them now with:
 
     rake
 
@@ -321,8 +320,8 @@ Things on the roadmap include:
 * improve on exception handling
 * support for customer matching (US-based page required)
 * retrieve user profile information seamlessly
-* support for image file uploads
 * support for multiple clients
+* use webmock to disallow remote requests in specs
 
 ## Credits
 

@@ -1,9 +1,9 @@
 require 'json'
 
+require "messenger_platform/messaging/base"
 require "messenger_platform/messaging/attachment"
 require "messenger_platform/messaging/image_attachment"
 require "messenger_platform/messaging/template_attachment"
-require "messenger_platform/messaging/base"
 require "messenger_platform/messaging/element"
 require "messenger_platform/messaging/button"
 require "messenger_platform/messaging/web_url_button"

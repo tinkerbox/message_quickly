@@ -13,15 +13,20 @@ module MessengerPlatform
 
       def get(request_string, params = {})
         params[:access_token] = page_access_token
-        response = connection.get request_string, params
+        response = connection.get(request_string, params)
         parse_json(response)
       end
 
       def post(request_string, params = {})
         params[:access_token] = page_access_token
-        response = connection.post request_string do |request|
-          request.headers['Content-Type'] = 'application/json'
-          request.body = JSON.generate(params)
+        response = connection.post(request_string) do |request|
+          if params[:filedata].present?
+            request.headers['Content-Type'] = 'multipart/form-data'
+            request.body = params
+          else
+            request.headers['Content-Type'] = 'application/json'
+            request.body = JSON.generate(params)
+          end
         end
         parse_json(response)
       end
@@ -41,11 +46,12 @@ module MessengerPlatform
         json
       end
 
-      def connection
+      def connection(params = {})
         @connection ||= Faraday.new(:url => "https://graph.facebook.com/#{MessengerPlatform::FB_MESSENGER_VERSION}") do |faraday|
+          faraday.request :multipart # if params[:multipart]
           faraday.request  :url_encoded # form-encode POST params
           faraday.response :logger unless Rails.env.test? # log requests to STDOUT
-          faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+          faraday.adapter Faraday.default_adapter  # make requests with Net::HTTP
         end
       end
 
