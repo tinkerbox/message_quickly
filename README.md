@@ -318,6 +318,7 @@ Set up your `.env` file like so:
     FACEBOOK_MESSENGER_PAGE_ID=<your facebook page id>
     FACEBOOK_MESSENGER_USER_ID=<your own facebook profile id>
     FACEBOOK_MESSENGER_USER_FIRST_NAME=<your own facebook profile's first name>
+    FACEBOOK_APP_ID=<your facebook app id>
 
 You will need your own Facebook profile id if you are to run the specs. Run them now with:
 
