@@ -5,10 +5,10 @@ module MessengerPlatform
       attr_accessor :phone_number
 
       def to_hash
-        if phone_number
-          { phone_number: phone_number }
-        else
+        if id.present?
           { id: id }
+        else
+          { phone_number: phone_number }
         end
       end
 

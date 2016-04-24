@@ -111,7 +111,12 @@ end
 
 #### Creating a recipient object
 
-    recipient = MessengerPlatform::Messaging::Recipient.new(id: '123')
+You can create a recipient with either an `id`, or a `phone_number`. If both are provided, messages will be sent via the `id`.
+
+```ruby
+recipient = MessengerPlatform::Messaging::Recipient.new(id: '123')
+recipient = MessengerPlatform::Messaging::Recipient.new(id: '123', phone_number: '+1(212)555-2368')
+```
 
 #### Sending a simple text message
 
@@ -121,7 +126,11 @@ delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
 end
 ```
 
-#### Sending an image as a URL
+#### Sending image attachments
+
+![Image attachments](https://cloud.githubusercontent.com/assets/19878/14765512/92b33ac6-0a17-11e6-8673-164b7802c102.png)
+
+You can either send an image attachment as a URL:
 
 ```ruby
 delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
@@ -131,7 +140,7 @@ delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
 end
 ```
 
-#### Sending an image as a file
+Or you can send it as a file:
 
 ```ruby
 delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
@@ -145,6 +154,8 @@ end
 ```
 
 #### Sending a generic template attachment
+
+![Generic template attachment](https://cloud.githubusercontent.com/assets/19878/14765514/9bd0ec48-0a17-11e6-8988-bb3652213285.png)
 
 ```ruby
 delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
@@ -228,6 +239,8 @@ end
 
 #### Sending a receipt template attachment
 
+![Receipt template attachment](https://cloud.githubusercontent.com/assets/19878/14765517/ab69af46-0a17-11e6-8700-17ae8b7d1e53.png)
+
 ```ruby
 delivery = MessengerPlatform::Api::Messages.create(recipient) do |delivery|
   delivery.build_message do |message|
@@ -291,7 +304,9 @@ end
 
 ### Plugins
 
-This is optional, and only necessary if you want to add the 'Send to Messenger' or 'Message Us' [buttons](https://developers.facebook.com/docs/messenger-platform/plugin-reference) to your app.
+This is optional, and only necessary if you want to add the 'Send to Messenger' or 'Message Us' [buttons](https://developers.facebook.com/docs/messenger-platform/plugin-reference) to your app, shown here:
+
+![Messenger plugins](https://cloud.githubusercontent.com/assets/19878/14765515/a16c57a0-0a17-11e6-8fec-b9798610b8bf.png)
 
 Firstly, add the javascript require to your manifest file:
 
@@ -332,6 +347,7 @@ Things on the roadmap include:
 * support for customer matching (US-based page required), not tested yet
 * support for multiple clients
 * use webmock to disallow remote requests in specs
+* yield message, instead of delivery to reduce boilerplate code
 
 ## Credits
 
