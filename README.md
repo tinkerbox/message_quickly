@@ -100,13 +100,23 @@ By default, the API client will be created for you, and is accessible at:
 
 This makes use of the environment variables `FACEBOOK_MESSENGER_PAGE_ACCESS_TOKEN` and `FACEBOOK_MESSENGER_PAGE_ID`.
 
-In future you will be able to create your own clients like so:
+If you would like to use different sets of credentials in the app, you can create your own clients like so:
 
 ```ruby
-@send_api_client = MessengerPlatform::Api::Client.new do |client|
+send_api_client = MessengerPlatform::Api::Client.new do |client|
   client.page_access_token = '<page access token goes here>'
   client.page_id = '<page id goes here>'
 end
+
+MessengerPlatform::Api::UserProfile.new(send_api_client).find('<fb page specific user id here>')
+```
+
+#### Looking up a user's profile
+
+Do note that we are using the default client, which is loaded automatically by default.
+
+```ruby
+MessengerPlatform::Api::UserProfile.find('<fb page specific user id here>')
 ```
 
 #### Creating a recipient object
@@ -335,7 +345,7 @@ Things on the roadmap include:
 * simplify callback name
 * catch FacebookApiException errors, can't generate one in the wild yet
 * support for customer matching (US-based page required), not tested yet
-* support for multiple clients
+* support for more complex welcome messages
 * use webmock to disallow remote requests in specs
 
 ## Credits

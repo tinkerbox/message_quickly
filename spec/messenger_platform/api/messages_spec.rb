@@ -4,7 +4,22 @@ describe MessengerPlatform::Api::Messages do
 
   subject { MessengerPlatform::Api::Messages }
 
+  let(:recipient) { MessengerPlatform::Messaging::Recipient.new(id: ENV['FACEBOOK_MESSENGER_USER_ID']) }
+
   describe '#create' do
+
+    context 'with own client' do
+
+      let(:client) { MessengerPlatform::Api::Client.new(page_access_token: ENV['FACEBOOK_MESSENGER_PAGE_ACCESS_TOKEN'], page_id: ENV['FACEBOOK_MESSENGER_PAGE_ID']) }
+
+      it 'should be able to send text' do
+        delivery = subject.new(client).create(recipient) do |message|
+          message.text = 'Hello'
+        end
+        expect(delivery.id).not_to be_nil
+      end
+
+    end
 
     context 'with invalid recipient' do
 
@@ -21,8 +36,6 @@ describe MessengerPlatform::Api::Messages do
     end
 
     context 'with a valid recipient' do
-
-      let(:recipient) { MessengerPlatform::Messaging::Recipient.new(id: ENV['FACEBOOK_MESSENGER_USER_ID']) }
 
       it 'should be able to send text' do
         delivery = subject.create(recipient) do |message|

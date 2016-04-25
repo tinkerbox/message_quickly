@@ -9,7 +9,11 @@ module MessengerPlatform
         #   "last_name": "Chang",
         #   "profile_pic": "https://fbcdn-profile-a.akamaihd.net/hprofile...70ec9c19b18"
         # }
-        json = client.get(id, { fields: 'first_name,last_name,profile_pic' })
+        UserProfile.new.find(id)
+      end
+
+      def find(id)
+        json = @client.get(id, { fields: 'first_name,last_name,profile_pic' })
         Messaging::User.new(json)
       end
 

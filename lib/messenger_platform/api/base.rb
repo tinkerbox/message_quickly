@@ -11,6 +11,10 @@ module MessengerPlatform
         end
       end
 
+      def initialize(override_client = nil)
+        @client = override_client || self.class.client
+      end
+
     end
   end
 end

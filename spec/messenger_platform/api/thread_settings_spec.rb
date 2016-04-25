@@ -8,6 +8,11 @@ describe MessengerPlatform::Api::ThreadSettings do
 
     let(:message) { MessengerPlatform::Messaging::Message.new(text: 'Hello') }
 
+    context 'with own client' do
+      let(:client) { MessengerPlatform::Api::Client.new(page_access_token: ENV['FACEBOOK_MESSENGER_PAGE_ACCESS_TOKEN'], page_id: ENV['FACEBOOK_MESSENGER_PAGE_ID']) }
+      it { expect(subject.new(client).create(message)).to eq(true) }
+    end
+
     context 'with valid params' do
       it { expect(subject.create(message)).to eq(true) }
     end
