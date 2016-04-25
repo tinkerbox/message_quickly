@@ -11,10 +11,6 @@ module MessengerPlatform
         yield self if block_given?
       end
 
-      def build_message
-        yield message if block_given?
-      end
-
       def to_hash
         hash = {}
         hash.merge!(recipient: recipient.to_hash) if recipient

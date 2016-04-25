@@ -6,7 +6,7 @@ describe MessengerPlatform::Api::UserProfile do
 
   describe '#find' do
 
-    let(:fbid) { '1043180089111188' }
+    let(:fbid) { ENV['FACEBOOK_MESSENGER_USER_ID'] }
     let(:fbid_invalid) { '091283908123' }
 
     context 'with own client' do

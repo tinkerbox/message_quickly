@@ -35,6 +35,34 @@ describe MessengerPlatform::Api::Messages do
 
     end
 
+    context 'with a phone number recipient' do
+
+      context "that's valid" do
+        let(:recipient) { MessengerPlatform::Messaging::Recipient.new(phone: '+1(212)555-2368') }
+
+        # it 'should be able to send text' do
+        #   pending
+        #   delivery = subject.create(recipient) do |message|
+        #     message.text = 'Hello'
+        #   end
+        #   expect(delivery.id).not_to be_nil
+        # end
+      end
+
+      context "that's invalid" do
+        let(:recipient) { MessengerPlatform::Messaging::Recipient.new(phone: '+1(212)555-2368') }
+
+        it 'should raise an exception' do
+          expect do
+            subject.create(recipient) do |message|
+              message.text = 'Hello'
+            end
+          end.to raise_exception(MessengerPlatform::Api::OauthException)
+        end
+      end
+
+    end
+
     context 'with a valid recipient' do
 
       it 'should be able to send text' do
