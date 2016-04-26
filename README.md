@@ -64,7 +64,7 @@ Mount the engine in your `routes.rb` (`/webhook` is used in the examples):
 
 Generate the callback files:
 
-    rails generate callbacks
+    rails generate messenger_platform:callbacks
 
 When you run `rails generate callbacks`, four files will be created for you. They look something like this:
 
