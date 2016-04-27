@@ -4,7 +4,7 @@ class MessageReceivedCallback < MessengerPlatform::Callback
     :messages
   end
 
-  def run(event)
+  def run(event, json)
   end
 
 end
