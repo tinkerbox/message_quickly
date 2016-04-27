@@ -11,7 +11,7 @@ module MessengerPlatform
         @callbacks[klass.new.callback_name] = klass.to_s
       end
 
-      def get_callback_handler_for(webhook_name)
+      def handler_for(webhook_name)
         @callbacks[webhook_name]&.constantize
       end
 
