@@ -4,7 +4,7 @@ class PostbackCallback < MessengerPlatform::Callback
     :messaging_postbacks
   end
 
-  def run(event)
+  def run(event, json)
   end
 
 end
