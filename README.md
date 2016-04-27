@@ -46,7 +46,10 @@ Go to your Facebook App page in the developer portal, and use the above verifica
 
 Facebook will then verify with the mounted engine, and you're all set.
 
-Note: Your app is required to be served over HTTPS. When working locally, I used the default WEBrick server as it supports HTTPS connections out of the box.
+### Notes
+
+Messenger Platform is designed to handle webhooks in background jobs on ActiveJob, so you should set up a queuing backend (e.g. Sidekiq) and configure ActiveJob to use it.
+Your app is required to be served over HTTPS. When working locally, I used the default WEBrick server as it supports HTTPS connections out of the box.
 
 ## Usage
 

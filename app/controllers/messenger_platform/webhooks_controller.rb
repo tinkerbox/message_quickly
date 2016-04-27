@@ -12,11 +12,11 @@ module MessengerPlatform
     end
 
     def callback
-      if MessengerPlatform::CallbackRegistry.process_request(request.body.read)
-        render nothing: true, status: 200
-      else
-        render plain: 'Error processing callback', status: 500
-      end
+      json = JSON.parse(request.body.read)
+      ProcessMessengerCallbackJob.perform_later(json)
+      render nothing: true, status: 200
+    rescue JSON::ParserError => e
+      render plain: 'Error processing callback', status: 500
     end
 
   end

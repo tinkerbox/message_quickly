@@ -10,6 +10,7 @@ module MessengerPlatform
         copy_file "message_delivered_callback.rb", "app/webhooks/message_delivered_callback.rb"
         copy_file "message_received_callback.rb", "app/webhooks/message_received_callback.rb"
         copy_file "postback_callback.rb", "app/webhooks/postback_callback.rb"
+        copy_file "process_messenger_callback_job.rb", "app/jobs/process_messenger_callback_job.rb"
       end
 
     end
