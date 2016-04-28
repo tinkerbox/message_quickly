@@ -229,4 +229,23 @@ describe MessengerPlatform::Api::Messages do
 
   end
 
+  describe '#create_from_hash' do
+
+    let(:client) { MessengerPlatform::Api::Client.new(page_access_token: ENV['FACEBOOK_MESSENGER_PAGE_ACCESS_TOKEN'], page_id: ENV['FACEBOOK_MESSENGER_PAGE_ID']) }
+    let(:recipient) { MessengerPlatform::Messaging::Recipient.new(id: ENV['FACEBOOK_MESSENGER_USER_ID']) }
+
+    let(:hash) do
+      MessengerPlatform::Messaging::Delivery.new(recipient: recipient) do |delivery|
+        delivery.build_message do |message|
+          message.text = 'Hello'
+        end
+      end.to_hash
+    end
+
+    it 'should be able to send text' do
+      expect(subject.new(client).create_from_hash(hash)).not_to be_nil
+    end
+
+  end
+
 end

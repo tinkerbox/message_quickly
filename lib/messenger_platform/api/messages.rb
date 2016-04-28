@@ -6,7 +6,7 @@ module MessengerPlatform
         # curl -X POST -H "Content-Type: application/json" -d '{
         #   "recipient":{
         #       "id":"USER_ID"
-        #   }, 
+        #   },
         #   "message":{
         #       "text":"hello, world!"
         #   }
@@ -21,13 +21,24 @@ module MessengerPlatform
 
       def create(recipient = nil, delivery = nil, &block)
         delivery ||= MessengerPlatform::Messaging::Delivery.new(recipient: recipient)
-
         block.call(delivery.message) if block
-
-        request_string = "me/messages"
-        json = @client.post(request_string, delivery.to_hash)
-        delivery.id = json['message_id']
+        delivery.id = perform_call(delivery.to_hash)
         delivery
+      end
+
+      def self.create_from_hash(hash)
+        Messages.new.create_from_hash(hash)
+      end
+
+      def create_from_hash(hash)
+        perform_call(hash)
+      end
+
+      private
+
+      def perform_call(hash)
+        json = @client.post("me/messages", hash)
+        json['message_id']
       end
 
     end
