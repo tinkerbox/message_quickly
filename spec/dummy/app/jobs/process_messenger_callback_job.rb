@@ -6,7 +6,7 @@ class ProcessMessengerCallbackJob < ActiveJob::Base
     MessengerPlatform::CallbackParser.new(json.deep_dup).parse do |event|
       callback_handler = MessengerPlatform::CallbackRegistry.handler_for(event.webhook_name)
       return unless callback_handler.present?
-      callback_handler.new.run(event, json.deep_dup)
+      callback_handler.new.run(event, json)
     end
   end
 

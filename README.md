@@ -49,6 +49,7 @@ Facebook will then verify with the mounted engine, and you're all set.
 ### Notes
 
 Messenger Platform is designed to handle webhooks in background jobs on ActiveJob, so you should set up a queuing backend (e.g. Sidekiq) and configure ActiveJob to use it.
+
 Your app is required to be served over HTTPS. When working locally, I used the default WEBrick server as it supports HTTPS connections out of the box.
 
 ## Usage
@@ -78,7 +79,7 @@ class AuthenticationCallback < MessengerPlatform::Callback
     :messaging_optins
   end
 
-  def run(event)
+  def run(event, json)
     # for e.g.
     # puts event.text
   end
