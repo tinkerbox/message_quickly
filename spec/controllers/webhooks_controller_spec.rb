@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe MessengerPlatform::WebhooksController, type: :controller do
+describe MessageQuickly::WebhooksController, type: :controller do
 
-  routes { MessengerPlatform::Engine.routes }
+  routes { MessageQuickly::Engine.routes }
 
   describe 'GET #verify' do
 

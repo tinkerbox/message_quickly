@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
 
-  mount MessengerPlatform::Engine => "/messenger_platform"
+  mount MessageQuickly::Engine => "/message_quickly"
 end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module MessengerPlatform
+module MessageQuickly
 
   describe CallbackParser do
     

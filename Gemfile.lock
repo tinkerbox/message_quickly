@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    messenger_platform (0.1.0)
+    MessageQuickly (0.1.0)
       faraday (~> 0)
       rails (~> 4.2)
 
@@ -144,9 +144,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  MessageQuickly!
   codeclimate-test-reporter (~> 0)
   dotenv (~> 2.1)
-  messenger_platform!
   pry (~> 0)
   rspec-rails (~> 3.4)
   sqlite3 (~> 1.3)

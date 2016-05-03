@@ -1,20 +1,20 @@
-[![Code Climate](https://codeclimate.com/github/tinkerbox/messenger_platform/badges/gpa.svg)](https://codeclimate.com/github/tinkerbox/messenger_platform)
-[![Test Coverage](https://codeclimate.com/github/tinkerbox/messenger_platform/badges/coverage.svg)](https://codeclimate.com/github/tinkerbox/messenger_platform/coverage)
-[![Circle CI](https://circleci.com/gh/tinkerbox/messenger_platform.svg?style=svg)](https://circleci.com/gh/tinkerbox/messenger_platform)
+[![Code Climate](https://codeclimate.com/github/tinkerbox/message_quickly/badges/gpa.svg)](https://codeclimate.com/github/tinkerbox/message_quickly)
+[![Test Coverage](https://codeclimate.com/github/tinkerbox/message_quickly/badges/coverage.svg)](https://codeclimate.com/github/tinkerbox/message_quickly/coverage)
+[![Circle CI](https://circleci.com/gh/tinkerbox/message_quickly.svg?style=svg)](https://circleci.com/gh/tinkerbox/message_quickly)
 
 # Messenger Platform
 
 By [Tinkerbox Studios](https://www.tinkerbox.com.sg).
 
-This gem is a lightweight solution to integrate [Facebook's messenger platform](https://developers.facebook.com/products/messenger/) into your rails app, allowing you to create bots to facilitate conversations with people on Facebook Messenger. It includes a mountable rails engine to handle [webhooks](https://developers.facebook.com/docs/messenger-platform/webhook-reference), and a simple client to talk to the [Send API](https://developers.facebook.com/docs/messenger-platform/send-api-reference).
+This gem is a lightweight solution to integrate [Facebook's Messenger Platform](https://developers.facebook.com/products/messenger/) into your rails app, allowing you to create bots to facilitate conversations with people on Facebook Messenger. It includes a mountable rails engine to handle [webhooks](https://developers.facebook.com/docs/messenger-platform/webhook-reference), and a simple client to talk to the [Send API](https://developers.facebook.com/docs/messenger-platform/send-api-reference).
 
-We also have an [accompanying demo app](https://github.com/tinkerbox/messenger_platform_demo).
+We also have an [accompanying demo app](https://github.com/tinkerbox/message_quickly_demo).
 
 ## Installation
 
 Add this to your Gemfile, and then `bundle install`:
 
-    gem 'messenger_platform'
+    gem 'message_quickly'
 
 Generate the page access token on the [developer portal](https://developers.facebook.com), which will allow you to start using the APIs:
 
@@ -64,16 +64,16 @@ Webhooks allow the Facebook Messenger Platform to talk to your app. For example,
 
 Mount the engine in your `routes.rb` (`/webhook` is used in the examples):
 
-    mount MessengerPlatform::Engine, at: "/webhook"
+    mount MessageQuickly::Engine, at: "/webhook"
 
 Generate the callback files:
 
-    rails generate messenger_platform:callbacks
+    rails generate message_quickly:callbacks
 
 When you run `rails generate callbacks`, four files will be created for you. They look something like this:
 
 ```ruby
-class AuthenticationCallback < MessengerPlatform::Callback
+class AuthenticationCallback < MessageQuickly::Callback
 
   def callback_name
     :messaging_optins
@@ -100,19 +100,19 @@ messaging_postbacks | PostbackCallback | Subscribes to postback callbacks
 
 By default, the API client will be created for you, and is accessible at:
 
-    MessengerPlatform::Api::Base.client
+    MessageQuickly::Api::Base.client
 
 This makes use of the environment variables `FACEBOOK_MESSENGER_PAGE_ACCESS_TOKEN` and `FACEBOOK_MESSENGER_PAGE_ID`.
 
 If you would like to use different sets of credentials in the app, you can create your own clients like so:
 
 ```ruby
-send_api_client = MessengerPlatform::Api::Client.new do |client|
+send_api_client = MessageQuickly::Api::Client.new do |client|
   client.page_access_token = '<page access token goes here>'
   client.page_id = '<page id goes here>'
 end
 
-MessengerPlatform::Api::UserProfile.new(send_api_client).find('<fb page specific user id here>')
+MessageQuickly::Api::UserProfile.new(send_api_client).find('<fb page specific user id here>')
 ```
 
 #### Looking up a user's profile
@@ -120,7 +120,7 @@ MessengerPlatform::Api::UserProfile.new(send_api_client).find('<fb page specific
 Do note that we are using the default client, which is loaded automatically by default.
 
 ```ruby
-MessengerPlatform::Api::UserProfile.find('<fb page specific user id here>')
+MessageQuickly::Api::UserProfile.find('<fb page specific user id here>')
 ```
 
 #### Creating a recipient object
@@ -128,14 +128,14 @@ MessengerPlatform::Api::UserProfile.find('<fb page specific user id here>')
 You can create a recipient with either an `id`, or a `phone_number`. If both are provided, messages will be sent via the `id`.
 
 ```ruby
-recipient = MessengerPlatform::Messaging::Recipient.new(id: '123')
-recipient = MessengerPlatform::Messaging::Recipient.new(id: '123', phone_number: '+1(212)555-2368')
+recipient = MessageQuickly::Messaging::Recipient.new(id: '123')
+recipient = MessageQuickly::Messaging::Recipient.new(id: '123', phone_number: '+1(212)555-2368')
 ```
 
 #### Sending a simple text message
 
 ```ruby
-delivery = MessengerPlatform::Api::Messages.create(recipient) do |message|
+delivery = MessageQuickly::Api::Messages.create(recipient) do |message|
   message.text = 'Hello'
 end
 ```
@@ -147,7 +147,7 @@ end
 You can either send an image attachment as a URL:
 
 ```ruby
-delivery = MessengerPlatform::Api::Messages.create(recipient) do |message|
+delivery = MessageQuickly::Api::Messages.create(recipient) do |message|
   message.build_attachment(:image) { |attachment| attachment.url = 'http://placehold.it/350x150' }
 end
 ```
@@ -155,7 +155,7 @@ end
 Or you can send it as a file:
 
 ```ruby
-delivery = MessengerPlatform::Api::Messages.create(recipient) do |message|
+delivery = MessageQuickly::Api::Messages.create(recipient) do |message|
   message.build_attachment(:image) do |attachment|
     attachment.file = "spec/fixtures/12057251_909506139117248_2059695706_n.png"
     attachment.file_type = 'image/png'
@@ -168,7 +168,7 @@ end
 ![Generic template attachment](https://cloud.githubusercontent.com/assets/19878/14765514/9bd0ec48-0a17-11e6-8988-bb3652213285.png)
 
 ```ruby
-delivery = MessengerPlatform::Api::Messages.create(recipient) do |message|
+delivery = MessageQuickly::Api::Messages.create(recipient) do |message|
   message.build_attachment(:generic_template) do |template|
 
     template.build_element do |element|
@@ -224,7 +224,7 @@ end
 #### Sending a button template attachment
 
 ```ruby
-delivery = MessengerPlatform::Api::Messages.create(recipient) do |message|
+delivery = MessageQuickly::Api::Messages.create(recipient) do |message|
   message.build_attachment(:button_template) do |template|
 
     template.text = 'How are you doing today?'
@@ -248,7 +248,7 @@ end
 ![Receipt template attachment](https://cloud.githubusercontent.com/assets/19878/14765517/ab69af46-0a17-11e6-8700-17ae8b7d1e53.png)
 
 ```ruby
-delivery = MessengerPlatform::Api::Messages.create(recipient) do |message|
+delivery = MessageQuickly::Api::Messages.create(recipient) do |message|
   message.build_attachment(:receipt_template) do |template|
 
     template.recipient_name = 'Stephane Crozatier'
@@ -314,7 +314,7 @@ This is optional, and only necessary if you want to add the 'Send to Messenger' 
 
 Firstly, add the javascript require to your manifest file:
 
-    //= require messenger_platform
+    //= require message_quickly
 
 Then, in your view templates (presumably slim), add:
 
