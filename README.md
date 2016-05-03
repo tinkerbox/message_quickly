@@ -2,13 +2,13 @@
 [![Test Coverage](https://codeclimate.com/github/tinkerbox/message_quickly/badges/coverage.svg)](https://codeclimate.com/github/tinkerbox/message_quickly/coverage)
 [![Circle CI](https://circleci.com/gh/tinkerbox/message_quickly.svg?style=svg)](https://circleci.com/gh/tinkerbox/message_quickly)
 
-# Messenger Platform
+# MessageQuickly
 
 By [Tinkerbox Studios](https://www.tinkerbox.com.sg).
 
 This gem is a lightweight solution to integrate [Facebook's Messenger Platform](https://developers.facebook.com/products/messenger/) into your rails app, allowing you to create bots to facilitate conversations with people on Facebook Messenger. It includes a mountable rails engine to handle [webhooks](https://developers.facebook.com/docs/messenger-platform/webhook-reference), and a simple client to talk to the [Send API](https://developers.facebook.com/docs/messenger-platform/send-api-reference).
 
-We also have an [accompanying demo app](https://github.com/tinkerbox/message_quickly_demo).
+We also have an [accompanying demo app](https://github.com/tinkerbox/messenger_platform_demo).
 
 ## Installation
 
@@ -346,9 +346,9 @@ You will need your own Facebook profile id if you are to run the specs. Run them
 
 Things on the roadmap include:
 
-* simplify callback name
+* simplify callback names
 * catch FacebookApiException errors, can't generate one in the wild yet
-* support for customer matching (US-based page required), not tested yet
+* support for customer matching (US-based page required), done but not tested yet
 * support for more complex welcome messages
 * use webmock to disallow remote requests in specs
 
