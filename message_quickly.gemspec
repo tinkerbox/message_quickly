@@ -5,7 +5,7 @@ require "message_quickly/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "MessageQuickly"
+  s.name        = "message_quickly"
   s.version     = MessageQuickly::VERSION
   s.authors     = ["Jaryl Sim"]
   s.email       = ["jaryl@tinkerbox.com.sg"]
