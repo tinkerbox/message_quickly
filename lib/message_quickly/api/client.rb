@@ -4,7 +4,7 @@ module MessageQuickly
   module Api
     class Client
 
-      attr_accessor :page_access_token, :page_id
+      attr_accessor :page_access_token, :page_id, :app_id
 
       def initialize(options = {})
         options.each { |key, value| instance_variable_set("@#{key}", value) }
