@@ -8,7 +8,7 @@ module MessageQuickly
       attr_reader :callbacks
 
       def register(klass)
-        @callbacks[klass.new.callback_name] = klass.to_s
+        @callbacks[klass.webhook_name] = klass.to_s
       end
 
       def handler_for(webhook_name)

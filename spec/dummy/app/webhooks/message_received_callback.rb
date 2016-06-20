@@ -1,10 +1,14 @@
 class MessageReceivedCallback < MessageQuickly::Callback
 
-  def callback_name
+  def self.webhook_name
     :messages
   end
 
-  def run(event, json)
+  def initialize(event, json)
+    super
+  end
+
+  def run
   end
 
 end

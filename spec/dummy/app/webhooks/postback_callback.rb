@@ -1,10 +1,14 @@
 class PostbackCallback < MessageQuickly::Callback
 
-  def callback_name
+  def self.webhook_name
     :messaging_postbacks
   end
 
-  def run(event, json)
+  def initialize(event, json)
+    super
+  end
+
+  def run
   end
 
 end

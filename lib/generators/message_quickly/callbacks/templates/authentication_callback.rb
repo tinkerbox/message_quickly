@@ -1,10 +1,14 @@
 class AuthenticationCallback < MessageQuickly::Callback
 
-  def callback_name
+  def self.webhook_name
     :messaging_optins
   end
 
-  def run(event, json)
+  def initialize(event, json)
+    super
+  end
+
+  def run
   end
 
 end
