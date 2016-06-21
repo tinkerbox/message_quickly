@@ -3,7 +3,7 @@ require 'spec_helper'
 module MessageQuickly
 
   describe CallbackParser do
-    
+
     context 'with a optin request' do
 
       let(:optin_json) { JSON.parse(File.read("spec/fixtures/optin_request.json")) }
@@ -34,6 +34,18 @@ module MessageQuickly
 
       it { expect { |b| subject.parse(&b) }.to yield_with_args(Messaging::MessageEvent) }
       it { expect(subject.parse).not_to be_empty }
+
+    end
+
+    context 'with a message request with attachment' do
+
+      let(:message_json) { JSON.parse(File.read("spec/fixtures/message_request_with_attachment.json")) }
+
+      subject { CallbackParser.new(message_json) }
+
+      it { expect { |b| subject.parse(&b) }.to yield_with_args(Messaging::MessageEvent) }
+      it { expect(subject.parse).not_to be_empty }
+      it { expect(subject.parse.first.attachments).not_to be_empty }
 
     end
 
