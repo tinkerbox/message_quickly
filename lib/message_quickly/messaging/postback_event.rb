@@ -7,7 +7,10 @@ module MessageQuickly
       attr_reader :payload
 
       def initialize(params = {})
-        initialize_params(params['postback'])
+        if params.include? :postback
+          @payload = params[:postback][:payload]
+          params.delete(:postback)
+        end
         super(params)
       end
 

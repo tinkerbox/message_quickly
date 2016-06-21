@@ -7,7 +7,10 @@ module MessageQuickly
       attr_reader :ref
 
       def initialize(params = {})
-        initialize_params(params['optin'])
+        if params.include? :optin
+          @ref = params[:optin][:ref]
+          params.delete(:optin)
+        end
         super(params)
       end
 

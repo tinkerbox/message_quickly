@@ -7,7 +7,12 @@ module MessageQuickly
       attr_reader :mids, :watermark, :seq
 
       def initialize(params = {})
-        initialize_params(params['delivery'])
+        if params.include? :delivery
+          @mids = params[:delivery][:mids]
+          @watermark = params[:delivery][:watermark]
+          @seq = params[:delivery][:seq]
+          params.delete(:delivery)
+        end
         super(params)
       end
 

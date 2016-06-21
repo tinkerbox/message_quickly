@@ -6,6 +6,7 @@ module MessageQuickly
     def initialize(event, json)
       @event ||= event
       @json ||= json
+      self
     end
 
   end

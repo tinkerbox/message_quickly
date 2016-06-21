@@ -48,7 +48,7 @@ module MessageQuickly
       events = []
       process_entry_json(@json['entry']) do |params|
         WEBHOOK_LOOKUP.keys.each do |key|
-          if params[:messaging][key.to_s]
+          if params[:messaging][key]
             events << WEBHOOK_LOOKUP[key].new(params[:messaging])
             break
           end
@@ -78,7 +78,7 @@ module MessageQuickly
         sender: sender,
         recipient: recipient,
         timestamp: timestamp,
-        messaging: event_json
+        messaging: event_json.deep_symbolize_keys
       }
     end
 

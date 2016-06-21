@@ -7,7 +7,13 @@ module MessageQuickly
       attr_reader :mid, :seq, :text, :attachments
 
       def initialize(params = {})
-        initialize_params(params['message'])
+        @attachments = params.delete(:attachments).collect { |attachment_params| Attachment.new(attachment_params) } if params.include?(:attachments)
+        if params.include? :message
+          @mid = params[:message][:mid]
+          @seq = params[:message][:seq]
+          @text = params[:message][:text]
+          params.delete(:message)
+        end
         super(params)
       end
 
@@ -18,7 +24,7 @@ module MessageQuickly
       protected
 
       def initialize_params(params)
-        @attachments = params.delete('attachments').collect { |attachment_params| Attachment.new(attachment_params) } if params['attachments']
+
         super(params)
       end
 

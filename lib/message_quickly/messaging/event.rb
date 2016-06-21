@@ -5,15 +5,10 @@ module MessageQuickly
       attr_reader :entry, :sender, :recipient, :timestamp
 
       def initialize(params = {})
-        @sender = Sender.new(params.delete("sender"))
-        @recipient = Recipient.new(params.delete("recipient"))
-        super(params)
-      end
-
-      protected
-
-      def initialize_params(params)
-        params.each { |key, value| instance_variable_set("@#{key}", value) }
+        params.deep_symbolize_keys!
+        @sender = Sender.new(params.delete(:sender)) if params.include?(:sender)
+        @recipient = Recipient.new(params.delete(:recipient)) if params.include?(:recipient)
+        super
       end
 
     end
