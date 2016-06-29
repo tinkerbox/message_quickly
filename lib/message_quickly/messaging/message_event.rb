@@ -7,14 +7,19 @@ module MessageQuickly
       attr_reader :mid, :seq, :text, :attachments
 
       def initialize(params = {})
-        @attachments = params[:message].delete(:attachments).collect { |attachment_params| Attachment.new(attachment_params) } if params.include?(:message) && params[:message].include?(:attachments)
+
+        @attachments = params[:message].delete(:attachments).collect { |attachment_params| Attachment.new(attachment_params) } if params.dig(:message, :attachments)
+        @attachments ||= []
+
         if params.include? :message
           @mid = params[:message][:mid]
           @seq = params[:message][:seq]
           @text = params[:message][:text]
           params.delete(:message)
         end
+
         super(params)
+
       end
 
       def webhook_name
@@ -24,7 +29,6 @@ module MessageQuickly
       protected
 
       def initialize_params(params)
-
         super(params)
       end
 

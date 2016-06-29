@@ -9,16 +9,16 @@ module MessageQuickly
         super(params)
       end
 
+      def file?
+        file.present? && file_type.present?
+      end
+
       def to_hash
         if file?
           { type: type, payload: { _: '' } } # cannot send empty hash
         else
           { type: type, payload: { url: url } }
         end
-      end
-
-      def file?
-        file.present? && file_type.present?
       end
 
     end

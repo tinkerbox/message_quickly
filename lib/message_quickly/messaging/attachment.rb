@@ -8,6 +8,10 @@ module MessageQuickly
         false
       end
 
+      def to_hash
+        { type: type, payload: payload }
+      end
+
     end
   end
 end
