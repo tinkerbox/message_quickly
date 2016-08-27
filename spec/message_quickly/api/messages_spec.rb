@@ -259,6 +259,25 @@ describe MessageQuickly::Api::Messages do
         expect(delivery.id).not_to be_nil
       end
 
+      it 'should be able to send quick replies' do
+        delivery = subject.create(recipient) do |message|
+
+          message.text = "Pick a color:"
+
+          message.build_quick_reply do |quick_reply|
+            quick_reply.title = 'Green'
+            quick_reply.payload = 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN'
+          end
+
+          message.build_quick_reply do |quick_reply|
+            quick_reply.title = 'Red'
+            quick_reply.payload = 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED'
+          end
+
+        end
+        expect(delivery.id).not_to be_nil
+      end
+
     end
 
   end

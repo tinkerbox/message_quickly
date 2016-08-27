@@ -37,6 +37,17 @@ module MessageQuickly
 
     end
 
+    context 'with a read event' do
+
+      let(:message_json) { JSON.parse(File.read("spec/fixtures/message_read.json")) }
+
+      subject { CallbackParser.new(message_json) }
+
+      it { expect { |b| subject.parse(&b) }.to yield_with_args(Messaging::ReadEvent) }
+      it { expect(subject.parse).not_to be_empty }
+
+    end
+
     context 'with a message request with attachment' do
 
       let(:message_json) { JSON.parse(File.read("spec/fixtures/message_request_with_attachment.json")) }

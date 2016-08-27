@@ -2,7 +2,7 @@ module MessageQuickly
   module Messaging
     class Message
 
-      attr_accessor :text, :attachment
+      attr_accessor :text, :attachment, :quick_replies
 
       def initialize(options = {})
         options.each { |key, value| instance_variable_set("@#{key}", value) }
@@ -27,12 +27,21 @@ module MessageQuickly
         yield attachment if block_given?
       end
 
+      def build_quick_reply
+        @quick_replies ||= []
+        new_quick_reply = MessageQuickly::Messaging::QuickReply.new
+        quick_replies << new_quick_reply
+        yield new_quick_reply
+      end
+
       def to_hash
         if attachment
-          { attachment: attachment.to_hash }
+          hash_buffer = { attachment: attachment.to_hash }
         else
-          { text: text }
+          hash_buffer = { text: text }
         end
+        hash_buffer.merge!({ quick_replies: quick_replies.collect { |quick_reply| quick_reply.to_hash } }) if quick_replies.present?
+        hash_buffer
       end
 
     end

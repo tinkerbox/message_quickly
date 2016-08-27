@@ -22,8 +22,20 @@
                 "payload":{
                   "url":"IMAGE_URL"
                 }
+              },
+              {
+                "type":"location",
+                "payload":{
+                  "coordinates":{
+                    "lat": 1.3062306,
+                    "long": 103.85575970000002
+                  }
+                }
               }
-            ]
+            ],
+            "quick_reply": {
+              "payload": "QUICK_REPLY_VALUE"
+            }
           }
         }
       ]

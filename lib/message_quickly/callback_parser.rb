@@ -12,6 +12,7 @@ require "message_quickly/messaging/web_url_button"
 require "message_quickly/messaging/postback_button"
 require "message_quickly/messaging/button_template_attachment"
 require "message_quickly/messaging/generic_template_attachment"
+require "message_quickly/messaging/quick_reply"
 
 require "message_quickly/messaging/receipt/address"
 require "message_quickly/messaging/receipt/adjustment"
@@ -31,6 +32,7 @@ require "message_quickly/messaging/optin_event"
 require "message_quickly/messaging/delivery_event"
 require "message_quickly/messaging/message_event"
 require "message_quickly/messaging/postback_event"
+require "message_quickly/messaging/read_event"
 
 module MessageQuickly
   class CallbackParser
@@ -43,7 +45,8 @@ module MessageQuickly
       optin: MessageQuickly::Messaging::OptinEvent,
       postback: MessageQuickly::Messaging::PostbackEvent,
       delivery: MessageQuickly::Messaging::DeliveryEvent,
-      message: MessageQuickly::Messaging::MessageEvent
+      message: MessageQuickly::Messaging::MessageEvent,
+      read: MessageQuickly::Messaging::ReadEvent
     }
 
     def parse

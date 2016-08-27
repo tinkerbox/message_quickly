@@ -17,7 +17,7 @@ describe MessageQuickly::WebhooksController, type: :controller do
       it { expect(response.body).to eq('Wrong validation token') }
       it { expect(response).to have_http_status(500) }
     end
-    
+
   end
 
   describe 'POST #callback' do
@@ -59,6 +59,23 @@ describe MessageQuickly::WebhooksController, type: :controller do
     context 'with a message request' do
 
       let(:optin_json) { File.read("spec/fixtures/message_request.json") }
+
+      context 'with valid params' do
+        before { post :callback, optin_json }
+        it { expect(response).to have_http_status(200) }
+      end
+
+      context 'with invalid params' do
+        before { post :callback, 'invalid json' }
+        it { expect(response.body).to eq('Error processing callback') }
+        it { expect(response).to have_http_status(500) }
+      end
+
+    end
+
+    context 'with a read event' do
+
+      let(:optin_json) { File.read("spec/fixtures/message_read.json") }
 
       context 'with valid params' do
         before { post :callback, optin_json }
