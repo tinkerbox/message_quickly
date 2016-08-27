@@ -71,6 +71,17 @@ module MessageQuickly
 
     end
 
+    context 'with an account link event' do
+
+      let(:message_json) { JSON.parse(File.read("spec/fixtures/account_link.json")) }
+
+      subject { CallbackParser.new(message_json) }
+
+      it { expect { |b| subject.parse(&b) }.to yield_with_args(Messaging::AccountLinkEvent) }
+      it { expect(subject.parse).not_to be_empty }
+
+    end
+
   end
 
 end

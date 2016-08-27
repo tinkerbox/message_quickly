@@ -11,6 +11,7 @@ require "message_quickly/api/not_permitted_exception"
 require "message_quickly/api/send_message_exception"
 require "message_quickly/api/thread_settings"
 require "message_quickly/api/user_profile"
+require "message_quickly/api/account_link"
 
 require "message_quickly/engine"
 

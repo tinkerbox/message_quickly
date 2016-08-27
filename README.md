@@ -94,7 +94,9 @@ Webhook Name | Callback Class | Description
 messaging_optins | AuthenticationCallback | Subscribes to authentication callbacks via the Send-to-Messenger Plugin
 messages | MessageReceivedCallback | Subscribes to message-received callbacks
 message_deliveries | MessageDeliveredCallback | Subscribes to message-delivered callbacks
+message_reads | MessageReadCallback | Subscribes to message read callbacks
 messaging_postbacks | PostbackCallback | Subscribes to postback callbacks
+account_linking | AccountLinkingCallback | Subscribes to account linking callbacks
 
 ### Send API
 
@@ -243,6 +245,23 @@ delivery = MessageQuickly::Api::Messages.create(recipient) do |message|
 end
 ```
 
+#### Sending an account linking button
+
+```ruby
+delivery = MessageQuickly::Api::Messages.create(recipient) do |message|
+
+  message.build_attachment(:button_template) do |template|
+
+    template.text = 'Please log in'
+
+    template.build_button(:account_link) do |button|
+      button.url = 'https://www.example.com/oauth/authorize'
+    end
+
+  end
+end
+```
+
 #### Sending a receipt template attachment
 
 ![Receipt template attachment](https://cloud.githubusercontent.com/assets/19878/14765517/ab69af46-0a17-11e6-8700-17ae8b7d1e53.png)
@@ -303,6 +322,26 @@ delivery = MessageQuickly::Api::Messages.create(recipient) do |message|
     end
 
   end
+end
+```
+
+#### Sending quick replies
+
+```ruby
+delivery = MessageQuickly::Api::Messages.create(recipient) do |message|
+
+  message.text = "Pick a color:"
+
+  message.build_quick_reply do |quick_reply|
+    quick_reply.title = 'Green'
+    quick_reply.payload = 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN'
+  end
+
+  message.build_quick_reply do |quick_reply|
+    quick_reply.title = 'Red'
+    quick_reply.payload = 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED'
+  end
+
 end
 ```
 

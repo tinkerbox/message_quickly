@@ -21,5 +21,9 @@ module MessageQuickly
       content_tag(:div, '', params)
     end
 
+    # def close_window(image_url = '', display_text = '')
+    #   redirect_to "https://www.messenger.com/closeWindow/?image_url=#{image_url}&display_text=#{display_text}."
+    # end
+
   end
 end

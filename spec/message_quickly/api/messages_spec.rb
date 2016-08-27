@@ -280,6 +280,23 @@ describe MessageQuickly::Api::Messages do
 
     end
 
+    it 'should be able to send account link buttons' do
+      delivery = subject.create(recipient) do |message|
+
+        message.build_attachment(:button_template) do |template|
+
+          template.text = 'Please log in'
+
+          template.build_button(:account_link) do |button|
+            button.url = 'https://www.example.com/oauth/authorize'
+          end
+
+        end
+
+      end
+      expect(delivery.id).not_to be_nil
+    end
+
   end
 
   describe '#create_from_hash' do

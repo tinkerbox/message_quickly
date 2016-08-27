@@ -10,6 +10,7 @@ require "message_quickly/messaging/element"
 require "message_quickly/messaging/button"
 require "message_quickly/messaging/web_url_button"
 require "message_quickly/messaging/postback_button"
+require "message_quickly/messaging/account_link_button"
 require "message_quickly/messaging/button_template_attachment"
 require "message_quickly/messaging/generic_template_attachment"
 require "message_quickly/messaging/quick_reply"
@@ -33,6 +34,7 @@ require "message_quickly/messaging/delivery_event"
 require "message_quickly/messaging/message_event"
 require "message_quickly/messaging/postback_event"
 require "message_quickly/messaging/read_event"
+require "message_quickly/messaging/account_link_event"
 
 module MessageQuickly
   class CallbackParser
@@ -45,6 +47,7 @@ module MessageQuickly
       optin: MessageQuickly::Messaging::OptinEvent,
       postback: MessageQuickly::Messaging::PostbackEvent,
       delivery: MessageQuickly::Messaging::DeliveryEvent,
+      account_linking: MessageQuickly::Messaging::AccountLinkEvent,
       message: MessageQuickly::Messaging::MessageEvent,
       read: MessageQuickly::Messaging::ReadEvent
     }

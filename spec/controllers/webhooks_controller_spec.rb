@@ -107,6 +107,23 @@ describe MessageQuickly::WebhooksController, type: :controller do
 
     end
 
+    context 'with an account link event' do
+
+      let(:optin_json) { File.read("spec/fixtures/account_link.json") }
+
+      context 'with valid params' do
+        before { post :callback, optin_json }
+        it { expect(response).to have_http_status(200) }
+      end
+
+      context 'with invalid params' do
+        before { post :callback, 'invalid json' }
+        it { expect(response.body).to eq('Error processing callback') }
+        it { expect(response).to have_http_status(500) }
+      end
+
+    end
+
   end
 
 end

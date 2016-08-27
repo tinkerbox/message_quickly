@@ -33,12 +33,6 @@ module MessageQuickly
         @is_echo
       end
 
-      protected
-
-      def initialize_params(params)
-        super(params)
-      end
-
     end
   end
 end

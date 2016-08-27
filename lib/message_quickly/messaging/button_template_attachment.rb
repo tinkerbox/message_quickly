@@ -16,6 +16,8 @@ module MessageQuickly
           button = WebUrlButton.new
         when :postback
           button = PostbackButton.new
+        when :account_link
+          button = AccountLinkButton.new
         end
         buttons << button.tap { |button| yield button }
       end
