@@ -13,7 +13,7 @@ module MessageQuickly
       end
 
       def find(id)
-        json = @client.get(id, { fields: 'first_name,last_name,profile_pic' })
+        json = @client.get(id, { fields: 'first_name,last_name,profile_pic,locale,timezone,gender' })
         Messaging::User.new(json)
       end
 

@@ -2,7 +2,7 @@ module MessageQuickly
   module Messaging
     class User < Base
 
-      attr_reader :id, :first_name, :last_name, :profile_pic
+      attr_reader :id, :first_name, :last_name, :profile_pic, :locale, :timezone, :gender
 
       def first_name
         @first_name || user_profile.first_name
