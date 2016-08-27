@@ -3,6 +3,8 @@ require 'json'
 require "message_quickly/messaging/base"
 require "message_quickly/messaging/attachment"
 require "message_quickly/messaging/image_attachment"
+require "message_quickly/messaging/video_attachment"
+require "message_quickly/messaging/audio_attachment"
 require "message_quickly/messaging/template_attachment"
 require "message_quickly/messaging/element"
 require "message_quickly/messaging/button"

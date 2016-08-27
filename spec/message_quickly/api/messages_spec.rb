@@ -89,6 +89,40 @@ describe MessageQuickly::Api::Messages do
         expect(delivery.id).not_to be_nil
       end
 
+      it 'should be able to send with an video url attachment' do
+        delivery = subject.create(recipient) do |message|
+          message.build_attachment(:video) { |attachment| attachment.url = 'http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4' }
+        end
+        expect(delivery.id).not_to be_nil
+      end
+
+      it 'should be able to send with an video file attachment' do
+        delivery = subject.create(recipient) do |message|
+          message.build_attachment(:video) do |attachment|
+            attachment.file = "spec/fixtures/SampleVideo_1280x720_1mb.mp4"
+            attachment.file_type = 'video/mp4'
+          end
+        end
+        expect(delivery.id).not_to be_nil
+      end
+
+      it 'should be able to send with an audio url attachment' do
+        delivery = subject.create(recipient) do |message|
+          message.build_attachment(:audio) { |attachment| attachment.url = 'http://www.stephaniequinn.com/Music/Commercial%20DEMO%20-%2010.mp3' }
+        end
+        expect(delivery.id).not_to be_nil
+      end
+
+      it 'should be able to send with an audio file attachment' do
+        delivery = subject.create(recipient) do |message|
+          message.build_attachment(:audio) do |attachment|
+            attachment.file = "spec/fixtures/jailhouse-rock-demo.mp3"
+            attachment.file_type = 'audio/png'
+          end
+        end
+        expect(delivery.id).not_to be_nil
+      end
+
       it 'should be able to send with a generic template attachment' do
         delivery = subject.create(recipient) do |message|
           message.build_attachment(:generic_template) do |template|

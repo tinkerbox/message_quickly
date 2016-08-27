@@ -13,6 +13,10 @@ module MessageQuickly
         case attachment_type
         when :image
           self.attachment = MessageQuickly::Messaging::ImageAttachment.new
+        when :audio
+          self.attachment = MessageQuickly::Messaging::AudioAttachment.new
+        when :video
+          self.attachment = MessageQuickly::Messaging::VideoAttachment.new
         when :generic_template
           self.attachment = MessageQuickly::Messaging::GenericTemplateAttachment.new
         when :button_template
