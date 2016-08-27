@@ -15,7 +15,7 @@ module MessageQuickly
 
       def to_hash
         if file?
-          { type: type, payload: { _: '' } } # cannot send empty hash
+          { type: type, payload: { url: '' } } # cannot send empty hash
         else
           { type: type, payload: { url: url } }
         end
