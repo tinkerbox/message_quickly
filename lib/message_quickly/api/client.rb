@@ -31,6 +31,15 @@ module MessageQuickly
         parse_json(response)
       end
 
+      def delete(request_string, params = {})
+        params[:access_token] = page_access_token
+        response = connection.delete(request_string) do |request|
+          request.headers['Content-Type'] = 'application/json'
+          request.body = JSON.generate(params)
+        end
+        parse_json(response)
+      end
+
       private
 
       def parse_json(response)
