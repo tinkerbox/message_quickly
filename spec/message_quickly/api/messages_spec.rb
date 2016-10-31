@@ -91,7 +91,7 @@ describe MessageQuickly::Api::Messages do
 
       it 'should be able to send with an video url attachment' do
         delivery = subject.create(recipient) do |message|
-          message.build_attachment(:video) { |attachment| attachment.url = 'http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4' }
+          message.build_attachment(:video) { |attachment| attachment.url = 'http://techslides.com/demos/sample-videos/small.mp4' }
         end
         expect(delivery.id).not_to be_nil
       end
