@@ -1,0 +1,18 @@
+{
+  "object":"page",
+  "entry":[
+      {
+        "id":"PAGE_ID",
+        "time":1476077449,
+        "changes":[
+            {
+              "field":"conversations",
+              "value":{
+                "thread_id":"CONVERSATION_ID",
+                "page_id":"PAGE_ID"
+              }
+            }
+          ]
+      }
+    ]
+}

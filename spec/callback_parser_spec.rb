@@ -82,6 +82,17 @@ module MessageQuickly
 
     end
 
+    context 'with a change notification event' do
+
+      let(:message_json) { JSON.parse(File.read("spec/fixtures/change_notification_request.json")) }
+
+      subject { CallbackParser.new(message_json) }
+
+      it { expect { |b| subject.parse(&b) }.to yield_with_args(ChangeUpdateEvent) }
+      it { expect(subject.parse).not_to be_empty }
+
+    end
+
   end
 
 end

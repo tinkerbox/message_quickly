@@ -5,7 +5,11 @@ Example:
     rails generate callbacks
 
     This will create:
+        config/initializers/webhooks.rb
         app/webhooks/authentication_callback.rb
         app/webhooks/message_delivered_callback.rb
         app/webhooks/message_received_callback.rb
         app/webhooks/postback_callback.rb
+        app/webhooks/change_update_callback.rb
+        app/jobs/process_messenger_callback_job.rb
+        app/jobs/send_messenger_delivery_job.rb

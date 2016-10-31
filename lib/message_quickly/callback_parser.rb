@@ -35,6 +35,7 @@ require "message_quickly/messaging/message_event"
 require "message_quickly/messaging/postback_event"
 require "message_quickly/messaging/read_event"
 require "message_quickly/messaging/account_link_event"
+require "message_quickly/change_update_event"
 
 module MessageQuickly
   class CallbackParser
@@ -55,6 +56,10 @@ module MessageQuickly
     def parse
       events = []
       process_entry_json(@json['entry']) do |params|
+        if params[:changes].present?
+          events << MessageQuickly::ChangeUpdateEvent.new(params)
+          next
+        end
         MESSAGING_WEBHOOK_LOOKUP.keys.each do |key|
           if params[:messaging].has_key?(key)
             events << MESSAGING_WEBHOOK_LOOKUP[key].new(params[:messaging])
@@ -71,10 +76,20 @@ module MessageQuickly
     def process_entry_json(json)
       json.each do |entry_json|
         entry = Messaging::Entry.new(entry_json)
+        entry_json['changes']&.each do |event_json|
+          yield change_update_callback_params(entry, event_json)
+        end
         entry_json['messaging']&.each do |event_json|
           yield messaging_callback_params(entry, event_json)
         end
       end
+    end
+
+    def change_update_callback_params(entry, event_json)
+      {
+        entry: entry,
+        changes: event_json.deep_symbolize_keys
+      }
     end
 
     def messaging_callback_params(entry, event_json)

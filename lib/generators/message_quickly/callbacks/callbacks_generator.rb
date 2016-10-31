@@ -13,6 +13,8 @@ module MessageQuickly
         copy_file "message_received_callback.rb", "app/webhooks/message_received_callback.rb"
         copy_file "postback_callback.rb", "app/webhooks/postback_callback.rb"
 
+        copy_file "change_update_callback.rb", "app/webhooks/change_update_callback.rb"
+
         copy_file "process_messenger_callback_job.rb", "app/jobs/process_messenger_callback_job.rb"
         copy_file "send_messenger_delivery_job.rb", "app/jobs/send_messenger_delivery_job.rb"
 
