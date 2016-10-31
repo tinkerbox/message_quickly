@@ -43,7 +43,7 @@ module MessageQuickly
       @json = json
     end
 
-    WEBHOOK_LOOKUP = {
+    MESSAGING_WEBHOOK_LOOKUP = {
       optin: MessageQuickly::Messaging::OptinEvent,
       postback: MessageQuickly::Messaging::PostbackEvent,
       delivery: MessageQuickly::Messaging::DeliveryEvent,
@@ -55,9 +55,9 @@ module MessageQuickly
     def parse
       events = []
       process_entry_json(@json['entry']) do |params|
-        WEBHOOK_LOOKUP.keys.each do |key|
-          if params[:messaging][key]
-            events << WEBHOOK_LOOKUP[key].new(params[:messaging])
+        MESSAGING_WEBHOOK_LOOKUP.keys.each do |key|
+          if params[:messaging].has_key?(key)
+            events << MESSAGING_WEBHOOK_LOOKUP[key].new(params[:messaging])
             break
           end
         end
@@ -71,21 +71,18 @@ module MessageQuickly
     def process_entry_json(json)
       json.each do |entry_json|
         entry = Messaging::Entry.new(entry_json)
-        entry_json['messaging'].each do |event_json|
-          sender = Messaging::Sender.new(event_json['sender'])
-          recipient = Messaging::Recipient.new(event_json['recipient'])
-          timestamp = event_json['timestamp']
-          yield callback_params(entry, sender, recipient, timestamp, event_json)
+        entry_json['messaging']&.each do |event_json|
+          yield messaging_callback_params(entry, event_json)
         end
       end
     end
 
-    def callback_params(entry, sender, recipient, timestamp, event_json)
+    def messaging_callback_params(entry, event_json)
       {
         entry: entry,
-        sender: sender,
-        recipient: recipient,
-        timestamp: timestamp,
+        sender: Messaging::Sender.new(event_json['sender']),
+        recipient: Messaging::Recipient.new(event_json['recipient']),
+        timestamp: event_json['timestamp'],
         messaging: event_json.deep_symbolize_keys
       }
     end
