@@ -178,6 +178,29 @@ describe MessageQuickly::Api::Messages do
         expect(delivery.id).not_to be_nil
       end
 
+      it 'should be able to send with a share button' do
+        delivery = subject.create(recipient) do |message|
+          message.build_attachment(:generic_template) do |template|
+
+            template.build_element do |element|
+
+              element.title = "Classic White T-Shirt"
+              element.image_url = 'http://petersapparel.parseapp.com/img/item100-thumb.png'
+              element.subtitle = 'Soft white cotton t-shirt is back in style'
+
+              element.build_button(:web_url) do |button|
+                button.url = "https://petersapparel.parseapp.com/view_item?item_id=100"
+                button.title = "View Item"
+              end
+
+              element.build_button(:share_button)
+
+            end
+          end
+        end
+        expect(delivery.id).not_to be_nil
+      end
+
       it 'should be able to send with a button template attachment' do
         delivery = subject.create(recipient) do |message|
           message.build_attachment(:button_template) do |template|

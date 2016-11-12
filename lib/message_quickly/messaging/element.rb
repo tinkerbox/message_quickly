@@ -17,8 +17,10 @@ module MessageQuickly
           button = PostbackButton.new
         when :account_link
           button = AccountLinkButton.new
+        when :share_button
+          button = ShareButton.new
         end
-        buttons << button.tap { |button| yield button }
+        buttons << button.tap { |button| yield button if block_given? }
       end
 
       def to_hash
