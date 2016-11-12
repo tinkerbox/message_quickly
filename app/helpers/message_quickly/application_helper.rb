@@ -21,6 +21,14 @@ module MessageQuickly
       content_tag(:div, '', params)
     end
 
+    def short_link(page_name, ref = nil)
+      if ref
+        "http://m.me/#{page_name}?ref=#{ref}"
+      else
+        "http://m.me/#{page_name}"
+      end
+    end
+
     # def close_window(image_url = '', display_text = '')
     #   redirect_to "https://www.messenger.com/closeWindow/?image_url=#{image_url}&display_text=#{display_text}."
     # end

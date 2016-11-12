@@ -389,7 +389,13 @@ Things on the roadmap include:
 * catch FacebookApiException errors, can't generate one in the wild yet
 * support for customer matching (US-based page required), done but not tested yet
 * support for more complex welcome messages
+* support for file attachments
 * use webmock to disallow remote requests in specs
+* support for airline tickets
+* support for payments (currently still in beta)
+* support for webviews & extensions
+* support for checkbox plugin
+* support for list templates
 
 ## Credits
 
