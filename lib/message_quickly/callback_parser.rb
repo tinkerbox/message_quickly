@@ -15,6 +15,7 @@ require "message_quickly/messaging/share_button"
 require "message_quickly/messaging/button_template_attachment"
 require "message_quickly/messaging/generic_template_attachment"
 require "message_quickly/messaging/quick_reply"
+require "message_quickly/messaging/quick_reply_location"
 
 require "message_quickly/messaging/receipt/address"
 require "message_quickly/messaging/receipt/adjustment"

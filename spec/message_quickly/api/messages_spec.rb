@@ -290,12 +290,23 @@ describe MessageQuickly::Api::Messages do
           message.build_quick_reply do |quick_reply|
             quick_reply.title = 'Green'
             quick_reply.payload = 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN'
+            quick_reply.image_url = 'https://www.tinkerbox.com.sg/favicons/favicon-196x196.png'
           end
 
           message.build_quick_reply do |quick_reply|
             quick_reply.title = 'Red'
             quick_reply.payload = 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED'
           end
+
+        end
+        expect(delivery.id).not_to be_nil
+      end
+
+      it 'should be able to send quick replies for location' do
+        delivery = subject.create(recipient) do |message|
+
+          message.text = "Please share your location:"
+          message.build_quick_reply(:location)
 
         end
         expect(delivery.id).not_to be_nil

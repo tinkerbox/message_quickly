@@ -27,11 +27,16 @@ module MessageQuickly
         yield attachment if block_given?
       end
 
-      def build_quick_reply
+      def build_quick_reply(quick_reply_type = nil)
         @quick_replies ||= []
-        new_quick_reply = MessageQuickly::Messaging::QuickReply.new
+        new_quick_reply = case quick_reply_type
+        when :location
+          MessageQuickly::Messaging::QuickReplyLocation.new
+        else
+          MessageQuickly::Messaging::QuickReply.new
+        end
         quick_replies << new_quick_reply
-        yield new_quick_reply
+        yield new_quick_reply if block_given?
       end
 
       def to_hash
