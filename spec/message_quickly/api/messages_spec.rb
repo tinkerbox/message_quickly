@@ -89,6 +89,25 @@ describe MessageQuickly::Api::Messages do
         expect(delivery.id).not_to be_nil
       end
 
+      it 'should be able to send with a reusable image url attachment' do
+        delivery = subject.create(recipient) do |message|
+          message.build_attachment(:image) do |attachment|
+            attachment.url = 'http://placehold.it/350x150'
+            attachment.is_reusable = true
+          end
+        end
+        expect(delivery.id).not_to be_nil
+      end
+
+      it 'should be able to send with a reused image url attachment' do
+        delivery = subject.create(recipient) do |message|
+          message.build_attachment(:image) do |attachment|
+            attachment.attachment_id = '10154049676340418'
+          end
+        end
+        expect(delivery.id).not_to be_nil
+      end
+
       it 'should be able to send with an video url attachment' do
         delivery = subject.create(recipient) do |message|
           message.build_attachment(:video) { |attachment| attachment.url = 'http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4' }

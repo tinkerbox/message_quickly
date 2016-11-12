@@ -2,10 +2,11 @@ module MessageQuickly
   module Messaging
     class AudioAttachment < Attachment
 
-      attr_accessor :url, :file, :file_type
+      attr_accessor :url, :file, :file_type, :is_reusable, :attachment_id
 
       def initialize(params = {})
         params['type'] ||= 'audio'
+        params['is_reusable'] ||= false
         super(params)
       end
 
@@ -14,10 +15,11 @@ module MessageQuickly
       end
 
       def to_hash
+        return { type: type, payload: { attachment_id: attachment_id } } if attachment_id
         if file?
-          { type: type, payload: { url: '' } } # cannot send empty hash
+          { type: type, payload: { url: '', is_reusable: is_reusable } } # cannot send empty hash
         else
-          { type: type, payload: { url: url } }
+          { type: type, payload: { url: url, is_reusable: is_reusable } }
         end
       end
 

@@ -2,7 +2,7 @@ module MessageQuickly
   module Messaging
     class Delivery
 
-      attr_accessor :id, :recipient, :message
+      attr_accessor :id, :recipient, :message, :attachment_id
       attr_accessor :notification_type # must be of values: REGULAR, SILENT_PUSH, NO_PUSH
 
       def initialize(options = {})

@@ -22,7 +22,7 @@ module MessageQuickly
       def create(recipient = nil, delivery = nil, &block)
         delivery ||= MessageQuickly::Messaging::Delivery.new(recipient: recipient)
         block.call(delivery.message) if block
-        delivery.id = perform_call(delivery.to_hash)
+        delivery.id, delivery.attachment_id = perform_call(delivery.to_hash)
         delivery
       end
 
@@ -38,7 +38,7 @@ module MessageQuickly
 
       def perform_call(hash)
         json = @client.post("me/messages", hash)
-        json['message_id']
+        return json['message_id'], json['attachment_id']
       end
 
     end
